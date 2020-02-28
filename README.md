@@ -490,7 +490,27 @@ Progress bar 가 나타나 진행 상태를 보여주며 빌드 오류 시 `빨�
 
 빌드 관련 로그 및 어플리케이션의 로그 등이 표시되어 나타남
 
-[Docker **hello-wolrd** 실행 결과](https://github.com/warumono-for-develop/docker-installation-tutorial#run-container) 에서 실행한 결과 정보와 추가적인 빌드 로그 정보가 보여지며 로그 마지막 부분에 `Finished: SUCCESS` 가 보였다면 정상적으로 빌드 및 배포가 완료되었음을 의미함
+[Docker **hello-wolrd** 실행 결과](https://github.com/warumono-for-develop/docker-installation-tutorial#run-container) 에서 실행한 결과 정보와 추가적인 빌드 로그 정보가 보여짐
+
+로그 첫번째 줄 **_`Started by user {your-jenkins-username}`_**
+
+로그 마지막 줄 **_`Finished: SUCCESS`_**
+
+가 보였다면 정상적으로 빌드 및 배포가 완료되었음을 의미함
+
+*직접 Jenkins 에서 빌드한 경우 로그 첫번째 줄에 `Started by user` 로 시작하고,*
+
+*원격으로 빌드한 경우 로그 첫번째 줄에 `Started by remote host` 로 시작하는 것이 상이함*
+
+```sh
+Started by user {your-jenkins-username}
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/{your-jenkins-job-name}
+[{your-jenkins-job-name}] $ /bin/sh -xe /tmp/jenkins7074309935194145387.sh
++ echo Hello Jenkins!
+Hello Jenkins!
+Finished: SUCCESS
+```
 
 </blockquote>
 
@@ -521,7 +541,27 @@ your-terminal> curl -X POST http://warumono:a3t32p94xe400rr29fb34abc41doofee@15.
 
 빌드 관련 로그 및 어플리케이션의 로그 등이 표시되어 나타남
 
-[Docker **hello-wolrd** 실행 결과](https://github.com/warumono-for-develop/docker-installation-tutorial#run-container) 에서 실행한 결과 정보와 추가적인 빌드 로그 정보가 보여지며 로그 마지막 부분에 `Finished: SUCCESS` 가 보였다면 정상적으로 빌드 및 배포가 완료되었음을 의미함
+[Docker **hello-wolrd** 실행 결과](https://github.com/warumono-for-develop/docker-installation-tutorial#run-container) 에서 실행한 결과 정보와 추가적인 빌드 로그 정보가 보여짐
+
+로그 첫번째 줄 **_`Started by user {your-jenkins-username}`_**
+
+로그 마지막 줄 **_`Finished: SUCCESS`_**
+
+가 보였다면 정상적으로 빌드 및 배포가 완료되었음을 의미함
+
+*원격으로 빌드한 경우 로그 첫번째 줄에 `Started by remote host` 로 시작하고,*
+
+*직접 Jenkins 에서 빌드한 경우 로그 첫번째 줄에 `Started by user` 로 시작하는 것이 상이함*
+
+```sh
+Started by remote host {your-remote-host-ip}
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/{your-jenkins-job-name}
+[{your-jenkins-job-name}] $ /bin/sh -xe /tmp/jenkins2767083941166045842.sh
++ echo Hello Jenkins!
+Hello Jenkins!
+Finished: SUCCESS
+```
 
 </blockquote>
 
@@ -603,4 +643,3 @@ Project link: [https://github.com/warumono-for-develop/jenkins-installation-tuto
 [license-shield]: https://img.shields.io/github/license/warumono-for-develop/jenkins-installation-tutorial.svg?style=flat-square
 [license-url]: https://github.com/warumono-for-develop/jenkins-installation-tutorial/blob/master/LICENSE
 [product-screenshot]: images/screenshot.png
-
