@@ -85,7 +85,8 @@
 
 
 
-## About The Tutorial [Back to Top](#table-of-contents)
+## About The Tutorial
+
 
 어플리케이션 배포를 자동화하여 편리하며
 
@@ -602,6 +603,5 @@ Project link: [https://github.com/warumono-for-develop/jenkins-installation-tuto
 [issues-url]: https://github.com/warumono-for-develop/jenkins-installation-tutorial/issues
 [license-shield]: https://img.shields.io/github/license/warumono-for-develop/jenkins-installation-tutorial.svg?style=flat-square
 [license-url]: https://github.com/warumono-for-develop/jenkins-installation-tutorial/blob/master/LICENSE
-[back-to-top]: https://github.com/warumono-for-develop/jenkins-installation-tutorial#table-of-contents
 [product-screenshot]: images/screenshot.png
 
