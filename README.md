@@ -63,6 +63,9 @@
       * [Step 7 Jenkins is ready!](#jenkins-is-ready!)
       * [Step 8 Connect into Jenkins](#connect-into-jenkins)
       * [Step 9 Install Docker in Jenkins](#install-docker-in-jenkins)
+    * [Step 4 Jenkins 원격 빌드 설정](#jenkins-원격-빌드-설정)
+      * [Step 1 임시 비밀번호 찾기](#임시-비밀번호-찾기)
+      * [Step 2 Jenkins 접속](#jenkins-접속)
 * [Usage](#usage)
   * [Step 1 Create new job](#create-new-job)
   * [Step 2 Build now](#build-now)
@@ -363,6 +366,56 @@ Docker version 19.03.6, build 369ce74a3c
 
 </blockquote>
 
+#### Step 4
+
+##### Jenkins 원격 빌드 설정
+
+curl 명령어 또는 웹 브라우져의 URL 입력 창에 원격 빌드 접근 URL 을 사용하여 빌드를 진행할 수 있음
+
+> ### Step 1
+
+<blockquote>
+
+#### 원격 빌드 활성화
+
+`Jenkins 대시보드` 화면에서 job 목록 중 원격 빌드 할 대상의 `Name` 을 클릭
+
+`Project {auto-jenkins-job-name}` 의 화면에서 왼쪽 메뉴 중 `Configure` 선택
+
+상세 화면에서 `Build Trigger 섹션` 목록 중 `Trigger builds remotely (e.g., from scripts)` 선택하여 **체크박스 활성화**
+
+그에 따라, `Authentication Token` 의 입력창이 나타나면 `비밀번호 처럼 사용하게 될 문자열 (암호화된 코드 등으로 가독성이 떨어지는 문자열 사용을 권장)` 입력
+
+</blockquote>
+
+> ### Step 2
+
+<blockquote>
+
+#### CSRF 비활성화
+
+`Jenkins 대시보드` 화면에서 왼쪽 메뉴 중 `Manage Jenkins` 선택
+
+`Manage Jenkins` 화면에서 하단 부분 설치되어 있는 Plugin 목록 중 `Configure Global Security` 선택
+
+`Configure Global Security` 화면에서 중간 부분 `Prevent Cross Site Request Forgery exploits` 선택하여 **체크박스 비활성화**
+
+</blockquote>
+
+> ### Step 3
+
+<blockquote>
+
+#### 사용자 인증 토큰 생성
+
+`Jenkins 대시보드` 화면에서 왼쪽 메뉴 중 `Manage Users` 선택
+
+`Users` 화면에서 사용자 목록 중 임의의 사용자 오른쪽 `톱니바퀴 버튼` 클릭
+
+사용자 상세 정보 화면에서 `API Token 섹션` 의 `Show API Token...` 버튼 클릭하여 **`API Token` 메모**
+
+</blockquote>
+
 
 
 <!-- USAGE EXAMPLES -->
@@ -410,7 +463,11 @@ Progress bar 가 나타나 진행 상태를 보여주며 빌드 오류 시 `빨�
 
 #### Step 3
 
-##### Test
+> ### Test
+
+<blockquote>
+
+#### 빌드 Test
 
 해당 빌드(`#X`)를 클릭하여 상세 화면으로 이동하여 화면 왼쪽 메뉴에서 `Console Output` 을 클릭
 
@@ -418,7 +475,26 @@ Progress bar 가 나타나 진행 상태를 보여주며 빌드 오류 시 `빨�
 
 [Docker **hello-wolrd** 실행 결과](https://github.com/warumono-for-develop/docker-installation-tutorial#run-container) 에서 실행한 결과 정보와 추가적인 빌드 로그 정보가 보여지며 로그 마지막 부분에 `Finished: SUCCESS` 가 보였다면 정상적으로 빌드 및 배포가 완료되었음을 의미함
 
+</blockquote>
 
+<blockquote>
+
+#### 원격 빌드 Test
+
+curl -X POST http://{your-jenkins-username}:{your-jenkins-api-token}@{your-host-ip:your-jenkins-port}/job/{your-jenkins-job-name}/build?token={your-jenkins-authentication-token}
+
+|변수|설명|참조|비고|
+|---|---|---|---|
+|your-jenkins-username|Jenkins 사용자 아이디|참조||
+|your-jenkins-api-token|Jenkins 사용자 API Token|참조||
+|your-host-ip:your-jenkins-port|Jenkins 호스트 서버 IP|참조||
+|your-jenkins-job-name|빌드 대상 Jenkins job Name|참조||
+|your-jenkins-authentication-token|Jenkins 원격 인증 토큰|참조||
+  
+  
+# <--- 명령어 규칙에 따라 샘플로 만든 프로젝트에서 실행한 실제 예 : curl -X post http://warumono:d193e7948249066e97b34ade37d00f33@15.164.231.38:8080/job/stocker-application/build?token=access_token
+
+</blockquote>
 
 <!-- ROADMAP -->
 
