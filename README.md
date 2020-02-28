@@ -183,6 +183,16 @@ Jenkins 설치는 터미널을 이용하여 명령어를 입력하는 작업이 
 
 AWS EC2 인스턴스에 적용되어 있는 보안 그룹으로 이동하여 Inbound 에 Jenkins 에 접속할 URL 의 PORT 추가
 
+#### AWS EC2 인스턴스 내부 IP 정보
+
+AWS EC2 인스턴스의 상세 정보 중 **Private IPs**
+
+*Private IPs 정보는 터미널의 명령어를 이용하여도 확인 가능*
+
+```sh
+your-terminal> ifconfig
+```
+
 ### Installation
 
 #### Step 1
@@ -376,7 +386,7 @@ curl 명령어 또는 웹 브라우져의 URL 입력 창에 원격 빌드 접근
 
 <blockquote>
 
-#### 원격 빌드 활성화
+#### 원격 빌드 활성화 및 Authentication Token 생성
 
 `Jenkins 대시보드` 화면에서 job 목록 중 원격 빌드 할 대상의 `Name` 을 클릭
 
@@ -384,7 +394,7 @@ curl 명령어 또는 웹 브라우져의 URL 입력 창에 원격 빌드 접근
 
 상세 화면에서 `Build Trigger 섹션` 목록 중 `Trigger builds remotely (e.g., from scripts)` 선택하여 **체크박스 활성화**
 
-그에 따라, `Authentication Token` 의 입력창이 나타나면 `비밀번호 처럼 사용하게 될 문자열 (암호화된 코드 등으로 가독성이 떨어지는 문자열 사용을 권장)` 입력
+그에 따라, `Authentication Token` 의 입력 창이 나타나면 `비밀번호 처럼 사용하게 될 문자열 (암호화된 코드 등으로 가독성이 떨어지는 문자열 사용을 권장)` 입력
 
 </blockquote>
 
@@ -406,7 +416,7 @@ curl 명령어 또는 웹 브라우져의 URL 입력 창에 원격 빌드 접근
 
 <blockquote>
 
-#### 사용자 인증 토큰 생성
+#### API Token 생성
 
 `Jenkins 대시보드` 화면에서 왼쪽 메뉴 중 `Manage Users` 선택
 
@@ -448,6 +458,7 @@ Docker 명령어는 공식 사이트 또는 인터넷 등으로 미리 숙지하
 
 ```sh
 docker pull {your-docker-image-name}
+
 docker run {your-docker-image-name}
 ```
 
@@ -481,12 +492,11 @@ Progress bar 가 나타나 진행 상태를 보여주며 빌드 오류 시 `빨�
 
 #### 원격 빌드 Test
 
-curl -X POST http://{your-jenkins-username}:{your-jenkins-api-token}@{your-host-ip:your-jenkins-port}/job/{your-jenkins-job-name}/build?token={your-jenkins-authentication-token}
+curl -X POST http://{your-jenkins-username}:{auto-jenkins-api-token}@{your-aws-ec2-private-ip:your-jenkins-port}/job/{your-jenkins-job-name}/build?token={your-jenkins-authentication-token}
 
-
-#### Create First Admin User
-
-`Create First Admin User` 화면에서 사용자 계정 정보를 입력하여 저장 (`Save and Finish`)
+```sh
+your-terminal> curl -X POST http://`warumono`:`a3t32p94xe400rr29fb34abc41doofee`@`15.225.202.16`:`8080`/job/`hello-app`/build?token=`build_token`
+```
 
 </blockquote>
 
@@ -494,19 +504,14 @@ curl -X POST http://{your-jenkins-username}:{your-jenkins-api-token}@{your-host-
 
 <blockquote>
 
-#### Instance Configuration
-
-
 |변수|설명|참조|비고|
 |---|---|---|---|
 |your-jenkins-username|Jenkins 사용자 아이디|[Create First Admin User](#create-first-admin-user)||
-|your-jenkins-api-token|Jenkins 사용자 API Token|참조||
-|your-host-ip:your-jenkins-port|Jenkins 호스트 서버 IP|참조||
-|your-jenkins-job-name|빌드 대상 Jenkins job Name|참조||
-|your-jenkins-authentication-token|Jenkins 원격 인증 토큰|참조||
-  
-  
-# <--- 명령어 규칙에 따라 샘플로 만든 프로젝트에서 실행한 실제 예 : curl -X post http://warumono:d193e7948249066e97b34ade37d00f33@15.164.231.38:8080/job/stocker-application/build?token=access_token
+|auto-jenkins-api-token|Jenkins API Token|[원격 빌드 활성화 및 API Token 생성](#원격-빌드-활성화-및-api-token-생성)||
+|your-aws-ec2-private-ip|Jenkins 호스트 서버 IP|[AWS EC2 인스턴스 내부 IP 정보](#aws-ec2-인스턴스-내부-ip-정보)||
+|your-jenkins-port|Jenkins 호스트 서버 PORT|[Instance Configuration](#instance-configuration)||
+|your-jenkins-job-name|빌드 대상 Jenkins job Name|[Create new job](#create-new-job)||
+|your-jenkins-authentication-token|Jenkins Authentication Token|[원격 빌드 활성화 및 Authentication Token 생성](#원격-빌드-활성화-및-authentication-token-생성)||
 
 </blockquote>
 
