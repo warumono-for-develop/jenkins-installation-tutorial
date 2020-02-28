@@ -216,17 +216,23 @@ Jenkins 최초 화면에서 비밀번호 입력에 관한 내용과 입력 창�
 
 ###### Customize Jenkins
 
-`Customize Jenkins` 화면에서 `Install suggested plugins` 를 선택하면 플러그인 목록이 나열되어 있고 자동으로 해당 플러그인들을 다운로드 및 설치하는 과정이 나옴
+`Customize Jenkins` 화면에서 `Install suggested plugins` 를 선택
+
+###### Step 4
+
+###### Getting Started
+
+`Getting Started` 화면에서 플러그인 목록이 나열되어 있고 자동으로 해당 플러그인들을 다운로드 및 설치 함
 
 *다소 시간이 걸리므로 차분히 설치 완료 될때까지 기다림*
 
-###### Step 4
+###### Step 5
 
 ###### Create First Admin User
 
 `Create First Admin User` 화면에서 사용자 계정 정보를 입력하여 저장(Save and Finish)
 
-###### Step 5
+###### Step 6
 
 ###### Instance Configuration
 
@@ -234,7 +240,7 @@ Jenkins 최초 화면에서 비밀번호 입력에 관한 내용과 입력 창�
 
 *jenkins 이미지의 경우 Instance Configuration 화면이 없음*
 
-###### Step 6
+###### Step 7
 
 ###### Jenkins is ready!
 
@@ -242,8 +248,7 @@ Jenkins 최초 화면에서 비밀번호 입력에 관한 내용과 입력 창�
 
 정상적으로 설정이 완료되었다면, `Jenkins 대시보드` 화면이 나타남
 
-
-###### Step 7
+###### Step 8
 
 ###### Connect into Jenkins
 
@@ -251,19 +256,22 @@ Jenkins 는 임의의 어플리케이션을 갖고 있어야 하기에 이 어�
 
 단, Jenkins 내부에 Docker 를 설치하지 않고 외부의 Docker 와 연동하는 방법도 존재하지만 본 설명서에는 Jenkins 내부에 Docker 를 설치하여 구동하는 것을 설명
 
-
 Jenkins 가 구동되어 있는 상태에서 진행하여야 하며, Docker 를 설치 과정은 Jenkins 내부로 접속하는 것부터 시작
 
 *docker* **exec -it *{your-jenkins-container-id}* /bin/bash**
 
 ```sh
+your-terminal> docker ps -a
+
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                   PORTS                       NAMES
+cb03e2270a2e        jenkins             "/bin/tini -- /usr/l…"   1 hours ago         Up 45 hours              0.0.0.0:8080->8080/tcp, 50000/tcp   funny_golick
+
 your-terminal> docker exec -it cb03e2270a2e /bin/bash
 
 your-jenkins>
 ```
 
-
-###### Step 7
+###### Step 9
 
 ###### Install Docker in Jenkins
 
@@ -279,9 +287,10 @@ your-jenkins> cd ~
 your-jenkins> curl -fsSL https://get.docker.com -o get-docker.sh
 
 your-jenkins> sh get-docker.sh
+
+your-jenkins> docker --version
+Docker version 19.03.6, build 369ce74a3c
 ```
-
-
 
 
 
@@ -304,6 +313,46 @@ Docker 명령어는 공식 사이트 또는 인터넷 등으로 미리 숙지하
 
 `Jenkins 대시보드` 화면에서 `create new job` 선택
 
+Enter an item name 사용자가 원하는 이름 입력
+
+Freestyle project 선택
+
+OK 클릭
+
+
+General 탭의 Build 섹션에서 Add build step 을 선택하여 Execute shell 선택
+
+Command 입력 창에 Git Hub 에 등록되어 Docker Hub 에서 업로드 된 이미지를 다운로드 하고, 해당 이미지의 컨테이너를 실행하는 명령어를 입력
+docker pull {your-docker-image-name}
+docker run {your-docker-image-name}
+
+
+Jenkins 대시보드로 이동하여 
+
+Case 1
+
+생성된 job 이 존재하지 않는 경우 아래 화면에서 `create new jobs` 를 선택
+또는, 왼쪽 메뉴에서 New Item 선택
+
+    Welcome to Jenkins!
+    Please create new jobs to get started.
+
+Enter an item name 사용자가 원하는 이름 입력
+
+Freestyle project 선택
+
+OK 클릭
+
+
+
+생성된 job 이 존재하는 경우 job 목록에서 해당 job 의 Name 을 선택
+
+해당 Project {your-jon-name} 으로 이동
+
+Project {your-jon-name} 화면에서 왼쪽 메뉴에서 Build Now 를 선택하면 왼쪽 메뉴 바로 아래에 Build History 에 실행 한 횟수에 따라 #X 와 실행 날짜가 생성 됨
+<--- 해당 빌드(#X)를 클릭하여 상세 화면으로 이동하여 화면 왼쪽 메뉴에서 Console Output 를 클릭하면 로그를 정보를 확인할 수 있음
+
+정상적으로 빌드 완료 후, 브라우져에서 어플리케이션을 테스트할 수 있는 URL(http://your-ec2-ip:your-local-port/xxx) 로 테스트
 
 #### Step 2
 
