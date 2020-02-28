@@ -87,12 +87,11 @@
 
 ## About The Tutorial
 
-
 어플리케이션 배포를 자동화하여 편리하며
 
 원격으로 배포를 진행 가능
 
-최종적으로, 어플리케이션 + Git + Docker + Jenkins 를 모두 연동하여 개발에 집중할 수 있도록 하는게 목적
+최종적으로, 어플리케이션 + `Git` + `Docker` + `Jenkins` 를 모두 연동하여 개발에 집중할 수 있도록 하는게 목적
 
 Jenkins 를 사용하는 이유 :
 * 배포 자동화에 따른 개발에 집중 가능
@@ -208,7 +207,7 @@ your-terminal> ifconfig
 
 Docker 명령어로 jenkins 키워드로 이미지 검색을 해보면 많은 이미지들이 조회 됨
 
-Jenkins 공식 사이트에서 제공하는 이미지의 이름은 `jenkins` 이나, 업데이트 및 관리가 지속적으로 되고 있지 않다는 소문(?)이 있으니
+Jenkins 공식 사이트에서 제공하는 이미지의 이름은 `jenkins` 이나, ~~업데이트 및 관리가 지속적으로 되고 있지 않다는 소문(?)이 있으니~~
 
 다른 이미지 이름 **`jenkins/jenkins`** 이미지를 다운받아 사용할 것을 권장
 
@@ -309,7 +308,7 @@ Jenkins 최초 화면에서 비밀번호 입력에 관한 내용과 입력 창�
 
 `Instance Configuration` 화면에서 `Jenkins URL: http://localhost:8080/` 기본 설정 값으로 사용
 
-*jenkins 이미지의 경우 Instance Configuration 화면이 없음*
+~~*jenkins 이미지의 경우 Instance Configuration 화면이 없음*~~
 
 </blockquote>
 
