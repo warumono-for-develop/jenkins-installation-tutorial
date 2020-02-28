@@ -177,7 +177,7 @@ your-terminal> docker pull jenkins/jenkins
 
 ##### Jenkins 구동
 
-docker run -d -p {your-host-inbound-port}:{your-jenkins-inbound-port} -v {your-host-jenkins-diectory-full-path}:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins
+docker run -d -p **_`{your-host-inbound-port}`_**:**_`{your-jenkins-inbound-port}`_** -v **_`{your-host-jenkins-diectory-full-path}`_**:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins
 
 ```sh
 your-terminal> docker run -d -p 8080:8080 -v /home/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins
