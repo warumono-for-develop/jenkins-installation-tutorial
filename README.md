@@ -136,8 +136,8 @@ Jenkins 를 사용하는 이유 :
 |순서|작업장|작업도구|작업내용|작업결과|참조|비고|
 |---|----|------|------|------|---|---|
 |1|AWS|웹 브라우져|EC2 설치|EC2 정상 구동|||
-|2|AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Docker 설치](https://github.com/warumono-for-develop/docker-installation-tutorial#Installation){:target="_blank"}||
-|2|AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Docker 구동](https://github.com/warumono-for-develop/docker-installation-tutorial#usage){:target="_blank"}|AWS EC2 용 Docker|
+|2|AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Docker 설치](https://github.com/warumono-for-develop/docker-installation-tutorial#Installation)||
+|2|AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Docker 구동](https://github.com/warumono-for-develop/docker-installation-tutorial#usage)|AWS EC2 용 Docker|
 |3|AWS EC2|터미널|Jenkins 설치|Jenkins 정상 설치|[Jenkins 설치](#jenkins-설치)||
 |3|AWS EC2|터미널|Jenkins 설정|Jenkins 정상 구동|[Jenkins 설정](#jenkins-설정)||
 |4|Jenkins in AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Install Docker in Jenkins](#install-docker-in-jenkins)|Jenkins 용 또 다른 Docker|
@@ -216,9 +216,11 @@ your-terminal> docker run -d -p 8080:8080 -v /home/jenkins:/var/jenkins_home -v 
 
 ##### Jenkins 설정
 
-###### Step 1
+> ### Step 1
 
-###### 임시 비밀번호 찾기
+<blockquote>
+
+#### 임시 비밀번호 찾기
 
 cat {your-host-jenkins-diectory-full-path}/secrets/initialAdminPassword
 
@@ -231,9 +233,13 @@ your-terminal> cat /var/jenkins/secrets/initialAdminPassword
 
 **{auto-password-hash-value}** 값 메모하여 [Jenkins 최초 화면 진입](#jenkins-접속)시 사용
 
-###### Step 2
+</blockquote>
 
-###### Jenkins 접속
+> ### Step 2
+
+<blockquote>
+
+#### Jenkins 접속
 
 정상적으로 Jenkins 가 구동되었다면, 웹 브라우져를 실행하고 URL 입력 창에 `http://{your-aws-ec2-private-ip}:{your-host-inbound-port}` 를 입력
 
@@ -241,45 +247,69 @@ Jenkins 최초 화면에서 비밀번호 입력에 관한 내용과 입력 창�
 
 **[{auto-password-hash-value}](#임시-비밀번호-찾기)** 값 복사하여 입력 창에 붙여넣기
 
-###### Step 3
+</blockquote>
 
-###### Customize Jenkins
+> #### Step 3
+
+<blockquote>
+
+#### Customize Jenkins
 
 `Customize Jenkins` 화면에서 `Install suggested plugins` 를 선택
 
-###### Step 4
+</blockquote>
 
-###### Plugins in Getting Started
+> #### Step 4
+
+<blockquote>
+
+#### Plugins in Getting Started
 
 `Getting Started` 화면에서 플러그인 목록이 나열되어 있고 자동으로 해당 플러그인들을 다운로드 및 설치 함
 
 *다소 시간이 걸리므로 차분히 설치 완료 될때까지 기다림*
 
-###### Step 5
+</blockquote>
 
-###### Create First Admin User
+> #### Step 5
+
+<blockquote>
+
+#### Create First Admin User
 
 `Create First Admin User` 화면에서 사용자 계정 정보를 입력하여 저장 (`Save and Finish`)
 
-###### Step 6
+</blockquote>
 
-###### Instance Configuration
+> #### Step 6
+
+<blockquote>
+
+#### Instance Configuration
 
 `Instance Configuration` 화면에서 `Jenkins URL: http://localhost:8080/` 기본 설정 값으로 사용
 
 *jenkins 이미지의 경우 Instance Configuration 화면이 없음*
 
-###### Step 7
+</blockquote>
 
-###### Jenkins is ready!
+> #### Step 7
+
+<blockquote>
+
+#### Jenkins is ready!
 
 `Jenkins is ready!` 화면에서 `Start using Jenkins` 버튼 클릭
 
 정상적으로 설정이 완료되었다면, `Jenkins 대시보드` 화면이 나타남
 
-###### Step 8
+</blockquote>
 
-###### Connect into Jenkins
+> #### Step 8
+
+<blockquote>
+
+#### Connect into Jenkins
 
 Jenkins 는 임의의 어플리케이션을 갖고 있어야 하기에 이 어플리케이션 파일 및 리소스를 Docker image 를 이용하기에 Jenkins 내부에 Docker 가 설치되어 있어야 함
 
@@ -300,9 +330,13 @@ your-terminal> docker exec -it cb03e2270a2e /bin/bash
 your-jenkins>
 ```
 
-###### Step 9
+</blockquote>
 
-###### Install Docker in Jenkins
+> #### Step 9
+
+<blockquote>
+
+#### Install Docker in Jenkins
 
 [Required](#required) [Docker Installation Tutorial](https://github.com/warumono-for-develop/docker-installation-tutorial) 과 혼돈하지 말아야 함
 
@@ -326,6 +360,8 @@ your-jenkins> sh get-docker.sh
 your-jenkins> docker --version
 Docker version 19.03.6, build 369ce74a3c
 ```
+
+</blockquote>
 
 
 
