@@ -231,7 +231,7 @@ your-terminal> cat /var/jenkins/secrets/initialAdminPassword
 {auto-password-hash-value}
 ```
 
-**{auto-password-hash-value}** 값 메모하여 [Jenkins 최초 화면 진입](#jenkins-접속)시 사용
+**{auto-password-hash-value}** 값 메모하여 [Jenkins 최초 화면 진입](#jenkins-접속) 시 사용
 
 </blockquote>
 
@@ -346,7 +346,7 @@ your-jenkins>
 
 Docker 공식 사이트에서 제공하는 Shell Script 를 다운로드 하여 해당 Shell Script 를 실행하므로써 **Docker 다운로드 및 설치, 설정을 한번에 작업 가능**
 
-*작업 진행 경로는 아무곳에서나 진행하여도 무관하나, 사용자 기본 접근 경로 ( `~` )에서 진행하였음*
+*작업 진행 경로는 아무곳에서나 진행하여도 무관하나, 사용자 기본 접근 경로 root 에서 진행하였음*
 
 *작업 완료 후, `exit` 을 입력하여 Jenkins 로 부터 나옴*
 
@@ -375,7 +375,7 @@ Docker version 19.03.6, build 369ce74a3c
 
 Docker 명령어는 공식 사이트 또는 인터넷 등으로 미리 숙지하고 사용하는 것을 권장
 
-본 설명글에는 *[자주 사용하는 명령어](#docker-command)* 를 간략하게 설명하였으니 참고하여 숙지하고 연습하기를 권장
+타 설명글에 *[자주 사용하는 명령어](https://github.com/warumono-for-develop/docker-installation-tutorial#docker-command)* 를 간략하게 설명하였으니 참고하여 숙지하고 연습하기를 권장
 
 #### Step 1
 
