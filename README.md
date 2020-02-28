@@ -306,7 +306,7 @@ Jenkins 최초 화면에서 비밀번호 입력에 관한 내용과 입력 창�
 
 #### Instance Configuration
 
-`Instance Configuration` 화면에서 `Jenkins URL: http://localhost:8080/` 기본 설정 값으로 사용
+`Instance Configuration` 화면에서 `Jenkins URL: http://{your-aws-ec2-private-ip}:8080/` 기본 설정 값으로 사용
 
 ~~*jenkins 이미지의 경우 Instance Configuration 화면이 없음*~~
 
