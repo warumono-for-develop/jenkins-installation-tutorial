@@ -523,7 +523,7 @@ curl -X POST http://{your-jenkins-username}:{auto-jenkins-api-token}@{your-aws-e
 |변수|설명|참조|비고|
 |---|---|---|---|
 |your-jenkins-username|Jenkins 사용자 아이디|[Create First Admin User](#create-first-admin-user)||
-|auto-jenkins-api-token|Jenkins API Token|[원격 빌드 활성화 및 API Token 생성](#원격-빌드-활성화-및-api-token-생성)||
+|auto-jenkins-api-token|Jenkins API Token|[API Token 생성](#api-token-생성)||
 |your-aws-ec2-private-ip|Jenkins 호스트 서버 IP|[AWS EC2 인스턴스 내부 IP 정보](#aws-ec2-인스턴스-내부-ip-정보)||
 |your-jenkins-port|Jenkins 호스트 서버 PORT|[Instance Configuration](#instance-configuration)||
 |your-jenkins-job-name|빌드 대상 Jenkins job Name|[Create new job](#create-new-job)||
