@@ -66,7 +66,7 @@
     * [Step 4 Jenkins 원격 빌드 설정](#jenkins-원격-빌드-설정)
       * [Step 1 원격 빌드 활성화 및 Authentication Token 생성](#원격-빌드-활성화-및-authentication-token-생성)
       * [Step 2 CSRF 비활성화](#csrf-비활성화)
-      * [Step 3 API Token 생성](#api-token 생성)
+      * [Step 3 API Token 생성](#api-token-생성)
 * [Usage](#usage)
   * [Step 1 Create new job](#create-new-job)
   * [Step 2 Build now](#build-now)
