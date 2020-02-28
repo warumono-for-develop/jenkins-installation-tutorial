@@ -149,45 +149,86 @@ Docker 설치는 터미널을 이용하여 명령어를 입력하는 작업이 �
 
 #### Step 1
 
-##### Plugin 설치
+##### Jenkins 설치
 
 ```sh
-your-terminal> sudo apt update
-
-your-terminal> sudo apt install apt-transport-https
-
-your-terminal> sudo install ca-certificates
-
-your-terminal> sudo install curl
-
-your-terminal> sudo install software-properties-common
-
-your-terminal> curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
-your-terminal> sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-
-your-terminal> sudo apt update
+your-terminal> docker pull jenkins/jenkins
 ```
 
 #### Step 2
 
-##### Docker 설치
+##### Jenkins 구동
+
+docker run -d -p {your-host-inbound-port}:{your-jenkins-inbound-port} -v {your-host-jenkins-diectory-full-path}:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins
 
 ```sh
-your-terminal> apt-cache policy docker-ce
-
-your-terminal> sudo apt install docker-ce
+your-terminal> docker run -d -p 8080:8080 -v /home/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins
 ```
 
 #### Step 3
 
-##### Docker 상태 확인
+##### Jenkins 설정
 
-*상태 확인 후, **_`control + C`_** 키를 눌러 Docker 에서 나옴*
-    
+###### Step 1
+
+###### 임시 비밀번호 찾기
+
+cat {your-host-jenkins-diectory-full-path}/secrets/initialAdminPassword
+
+또는, `docker logs jenkins` 명령어로 해당 비밀번호 해시 값 확인 가능
+
 ```sh
-your-terminal> sudo systemctrl status docker
+your-terminal> cat /var/jenkins/secrets/initialAdminPassword
+{auto-password-hash-value}
 ```
+
+{auto-password-hash-value} 값 메모
+
+
+###### Step 2
+
+###### Jenkins 접속
+
+정상적으로 Jenkins 가 구동되었다면, 웹 브라우져를 실행하고 URL 입력 창에 `http://{your-aws-ec2-private-ip}:{your-host-inbound-port}` 를 입력
+
+Jenkins 최초 화면에서 비밀번호 입력에 관한 내용과 입력 창이 보임
+
+{auto-password-hash-value} 값 복사하여 입력 창에 붙여넣기
+
+
+###### Step 3
+
+###### Customize Jenkins
+
+`Customize Jenkins` 화면에서 `Install suggested plugins` 를 선택하면 플러그인 목록이 나열되어 있고 자동으로 해당 플러그인들을 다운로드 및 설치하는 과정이 나옴
+
+*다소 시간이 걸리므로 차분히 설치 완료 될때까지 기다림*
+
+
+###### Step 4
+
+###### Create First Admin User
+
+`Create First Admin User` 화면에서 사용자 계정 정보를 입력하여 저장(Save and Finish)
+
+
+###### Step 5
+
+###### Instance Configuration
+
+`Instance Configuration` 화면에서 `Jenkins URL: http://localhost:8080/` 기본 설정 값으로 사용
+
+*jenkins 이미지의 경우 Instance Configuration 화면이 없음*
+
+
+
+###### Step 6
+
+###### Jenkins is ready!
+
+`Jenkins is ready!` 화면에서 `Start using Jenkins` 버튼 클릭
+
+정상적으로 설정이 완료되었다면, `Jenkins 대시보드` 화면이 나타남
 
 
 
@@ -205,7 +246,12 @@ Docker 명령어는 공식 사이트 또는 인터넷 등으로 미리 숙지하
 
 #### Step 1
 
-##### Pull image
+##### Create new job
+
+
+`Jenkins 대시보드` 화면에서 `create new job` 선택
+
+
 
 Docker Hub 에 등록되어 공개되어 있는 image 를 검색하는 명령어
 
