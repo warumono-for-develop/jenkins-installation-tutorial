@@ -494,10 +494,6 @@ Progress bar 가 나타나 진행 상태를 보여주며 빌드 오류 시 `빨�
 
 curl -X POST http://{your-jenkins-username}:{auto-jenkins-api-token}@{your-aws-ec2-private-ip:your-jenkins-port}/job/{your-jenkins-job-name}/build?token={your-jenkins-authentication-token}
 
-```sh
-your-terminal> curl -X POST http://*warumono*:`a3t32p94xe400rr29fb34abc41doofee`@`15.225.202.16`:`8080`/job/`hello-app`/build?token=`build_token`
-```
-
 |변수|설명|참조|비고|
 |---|---|---|---|
 |your-jenkins-username|Jenkins 사용자 아이디|[Create First Admin User](#create-first-admin-user)||
@@ -506,6 +502,20 @@ your-terminal> curl -X POST http://*warumono*:`a3t32p94xe400rr29fb34abc41doofee`
 |your-jenkins-port|Jenkins 호스트 서버 PORT|[Instance Configuration](#instance-configuration)||
 |your-jenkins-job-name|빌드 대상 Jenkins job Name|[Create new job](#create-new-job)||
 |your-jenkins-authentication-token|Jenkins Authentication Token|[원격 빌드 활성화 및 Authentication Token 생성](#원격-빌드-활성화-및-authentication-token-생성)||
+
+명령어 규칙에 따라 작성된 예시
+
+```sh
+your-terminal> curl -X POST http://warumono:a3t32p94xe400rr29fb34abc41doofee@15.225.202.16:8080/job/hello-app/build?token=build_token
+```
+
+`Jenkins 대시보드` 화면에서 job 목록 중 빌드 대상이였던 job Name 을 클릭하여 상세 화면으로 이동
+
+해당 빌드(`#X`)를 클릭하여 상세 화면으로 이동하여 화면 왼쪽 메뉴에서 `Console Output` 을 클릭
+
+빌드 관련 로그 및 어플리케이션의 로그 등이 표시되어 나타남
+
+[Docker **hello-wolrd** 실행 결과](https://github.com/warumono-for-develop/docker-installation-tutorial#run-container) 에서 실행한 결과 정보와 추가적인 빌드 로그 정보가 보여지며 로그 마지막 부분에 `Finished: SUCCESS` 가 보였다면 정상적으로 빌드 및 배포가 완료되었음을 의미함
 
 </blockquote>
 
