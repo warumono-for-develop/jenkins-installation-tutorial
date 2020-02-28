@@ -495,14 +495,8 @@ Progress bar 가 나타나 진행 상태를 보여주며 빌드 오류 시 `빨�
 curl -X POST http://{your-jenkins-username}:{auto-jenkins-api-token}@{your-aws-ec2-private-ip:your-jenkins-port}/job/{your-jenkins-job-name}/build?token={your-jenkins-authentication-token}
 
 ```sh
-your-terminal> curl -X POST http://`warumono`:`a3t32p94xe400rr29fb34abc41doofee`@`15.225.202.16`:`8080`/job/`hello-app`/build?token=`build_token`
+your-terminal> curl -X POST http://*warumono*:`a3t32p94xe400rr29fb34abc41doofee`@`15.225.202.16`:`8080`/job/`hello-app`/build?token=`build_token`
 ```
-
-</blockquote>
-
-> #### Step 6
-
-<blockquote>
 
 |변수|설명|참조|비고|
 |---|---|---|---|
