@@ -46,23 +46,27 @@
 * [About the Tutorial](#about-the-tutorial)
   * [Official Website](#official-website)
   * [Built With](#built-with)
+* [Preview](#preview)
 * [Getting Started](#getting-started)
   * [References](#references)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-    * [Step 1 Plugin 설치](#step-1)
-    * [Step 2 Docker 설치](#step-2)
-    * [Step 3 Docker 상태 확인](#step-3)
+    * [Step 1 Jenkins 설치](#step-1-jenkins-설치)
+    * [Step 2 Jenkins 구동](#step-2-jenkins-구동)
+    * [Step 3 Jenkins 설정](#step-3-jenkins 설정)
+      * [Step 1 임시 비밀번호 찾기](#step-임시-비밀번호-찾기)
+      * [Step 2 Jenkins 접속](#step-2-jenkins-접속)
+      * [Step 3 Customize Jenkins](#step-3-customize-jenkins)
+      * [Step 4 Getting Started](#step-4-getting-started)
+      * [Step 5 Create First Admin User](#step-5-create-first-admin-user)
+      * [Step 6 Instance Configuration](#step-6-instance-configuration)
+      * [Step 7 Jenkins is ready!](#step-7-jenkins-is-ready!)
+      * [Step 8 Connect into Jenkins](#step-8-connect-into-jenkins)
+      * [Step 9 Install Docker in Jenkins](#step-9-install-docker-in-jenkins)
 * [Usage](#usage)
-  * [Step 1 Pull image](#step-1)
-  * [Step 2 List images in local Docker](#step-2)
-  * [Step 3 Run container](#step-3)
-  * [Step 4 List containers in Docker](#step-4)
-  * [Step 5 Stop container](#step-5)
-  * [Step 6 Remove container](#step-6)
-  * [Step 7 Remove image](#step-7)
-* [Attach](#attach)
-  * [Docker command](#docker-command)
+  * [Step 1 Create new job](#step-1#create-new-job)
+  * [Step 2 Build now](#step-2#build-now)
+  * [Step 3 Test](#step-3#test)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -366,7 +370,7 @@ docker run {your-docker-image-name}
 
 왼쪽 메뉴 아래에 `Build History` 에 실행 한 횟수에 따라 `#{auto-jenkins-build-index}` 와 실행 날짜가 생성되어 표시 됨
 
-*해당 빌드(`#X`)를 클릭하여 상세 화면으로 이동하여 화면 왼쪽 메뉴에서 `Console Output` 을 클릭하여 빌드 진행 관련 로그를 정보를 확인할 수 있음*
+Progress bar 가 나타나 진행 상태를 보여주며 빌드 오류 시 `빨간색` 으로 표시되고, 정상적인 경우 `파란색` 으로 표시 됨
 
 #### Step 3
 
@@ -376,8 +380,7 @@ docker run {your-docker-image-name}
 
 빌드 관련 로그 및 어플리케이션의 로그 등이 표시되어 나타남
 
-
-정상적으로 빌드 완료 후, 브라우져에서 어플리케이션을 테스트할 수 있는 URL(http://{your-asw-ec2-pivarte-ip}:{your-host-inbound-port}/{your-application-test-url}) 로 테스트
+[Docker **hello-wolrd** 실행 결과](https://github.com/warumono-for-develop/docker-installation-tutorial#run-container) 에서 실행한 결과 정보와 추가적인 빌드 로그 정보가 보여지며 로그 마지막 부분에 `Finished: SUCCESS` 가 보였다면 정상적으로 빌드 및 배포가 완료되었음을 의미함
 
 
 
