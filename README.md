@@ -408,13 +408,13 @@ curl 명령어 또는 웹 브라우져의 URL 입력 창에 원격 빌드 접근
 
 <blockquote>
 
-#### CSRF 비활성화
+~~#### CSRF 비활성화~~
 
-`Jenkins 대시보드` 화면에서 왼쪽 메뉴 중 `Manage Jenkins` 선택
+~~`Jenkins 대시보드` 화면에서 왼쪽 메뉴 중 `Manage Jenkins` 선택~~
 
-`Manage Jenkins` 화면에서 하단 부분 설치되어 있는 Plugin 목록 중 `Configure Global Security` 선택
+~~`Manage Jenkins` 화면에서 하단 부분 설치되어 있는 Plugin 목록 중 `Configure Global Security` 선택~~
 
-`Configure Global Security` 화면에서 중간 부분 `Prevent Cross Site Request Forgery exploits` 선택하여 **체크박스 비활성화**
+~~`Configure Global Security` 화면에서 중간 부분 `Prevent Cross Site Request Forgery exploits` 선택하여 **체크박스 비활성화**~~
 
 </blockquote>
 
