@@ -243,7 +243,7 @@ your-terminal> docker run -d -p 8080:8080 -v /home/jenkins:/var/jenkins_home -v 
 
 cat {your-host-jenkins-diectory-full-path}/secrets/initialAdminPassword
 
-또는, `docker logs jenkins` 명령어로 해당 비밀번호 해시 값 확인 가능
+또는, `docker logs {your-jenkins-container-id}` 명령어로 해당 비밀번호 해시 값 확인 가능
 
 ```sh
 your-terminal> cat /var/jenkins/secrets/initialAdminPassword
