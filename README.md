@@ -121,6 +121,29 @@ Jenkins 를 사용하는 이유 :
 
 
 
+<!-- PREVIEW -->
+
+
+
+## Preview
+
+전반적으로 소소한 설정 작업이 많아, 전체적인 작업 순서를 간략하게 기술
+
+|순서|작업장|작업도구|작업내용|작업결과|참조|비고|
+|---|----|------|------|------|-----|---|
+|1|AWS|웹 브라우져|EC2 설치|EC2 정상 구동|||
+|2|AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Docker Installation Tutorial](https://github.com/warumono-for-develop/docker-installation-tutorial#prerequisites)||
+|2|AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Docker Installation Tutorial](https://github.com/warumono-for-develop/docker-installation-tutorial)|AWS EC2 용 Docker|
+|3|AWS EC2|터미널|Jenkins 설치|Jenkins 정상 설치|[1](#aaa)||
+|3|AWS EC2|터미널|Jenkins 설정|Jenkins 정상 구동|[Jenkins 설정](#jenkins-설정)||
+|4|Jenkins in AWS EC2|터미널|Docker 설치|Docker 정상 설치|[1](#aaa)|Jenkins 용 또 다른 Docker|
+|4|Jenkins in AWS EC2|터미널|Docker 설정|Docker 정상 구동|[1](#aaa)|Jenkins 용 또 다른 Docker|
+|6|Jenkins in AWS EC2|터미널|job 생성|job 정상 생성|[1](#aaa)||
+|7|Jenkins in AWS EC2|터미널|job 빌드|Docker 이미지 다운로드 및 실행|[1](#aaa)||
+|8|Jenkins in AWS EC2|터미널|job 로그 확인|Docker 이미지 정상 구동 확인|[1](#aaa)||
+
+
+
 <!-- GETTING STARTED -->
 
 
