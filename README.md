@@ -132,12 +132,12 @@ Jenkins 를 사용하는 이유 :
 |순서|작업장|작업도구|작업내용|작업결과|참조|비고|
 |---|----|------|------|------|-----|---|
 |1|AWS|웹 브라우져|EC2 설치|EC2 정상 구동|||
-|2|AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Docker Installation Tutorial](https://github.com/warumono-for-develop/docker-installation-tutorial#prerequisites)||
-|2|AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Docker Installation Tutorial](https://github.com/warumono-for-develop/docker-installation-tutorial)|AWS EC2 용 Docker|
-|3|AWS EC2|터미널|Jenkins 설치|Jenkins 정상 설치|[1](#aaa)||
+|2|AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Docker 설치](https://github.com/warumono-for-develop/docker-installation-tutorial#Installation){:target="_blank"}||
+|2|AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Docker 구동](https://github.com/warumono-for-develop/docker-installation-tutorial#usage){:target="_blank"}|AWS EC2 용 Docker|
+|3|AWS EC2|터미널|Jenkins 설치|Jenkins 정상 설치|[Jenkins 설치](#jenkins-설치)||
 |3|AWS EC2|터미널|Jenkins 설정|Jenkins 정상 구동|[Jenkins 설정](#jenkins-설정)||
-|4|Jenkins in AWS EC2|터미널|Docker 설치|Docker 정상 설치|[1](#aaa)|Jenkins 용 또 다른 Docker|
-|4|Jenkins in AWS EC2|터미널|Docker 설정|Docker 정상 구동|[1](#aaa)|Jenkins 용 또 다른 Docker|
+|4|Jenkins in AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Install Docker in Jenkins](#install-docker-in-jenkins)|Jenkins 용 또 다른 Docker|
+|4|Jenkins in AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Install Docker in Jenkins](#install-docker-in-jenkins)|Jenkins 용 또 다른 Docker|
 |6|Jenkins in AWS EC2|터미널|job 생성|job 정상 생성|[1](#aaa)||
 |7|Jenkins in AWS EC2|터미널|job 빌드|Docker 이미지 다운로드 및 실행|[1](#aaa)||
 |8|Jenkins in AWS EC2|터미널|job 로그 확인|Docker 이미지 정상 구동 확인|[1](#aaa)||
@@ -306,7 +306,7 @@ your-jenkins>
 
 본 순서에서 진행하는 Docker 설치는 **`Jenkins 내부`에서 사용하게 되는 Docker**
 
-Docker 공식 사이트에서 제공하는 Shell Script 를 다운로드 하여 해당 Shell Script 를 실행하므로써 **Docker 다운로드 및 설치를 한번에 작업 가능**
+Docker 공식 사이트에서 제공하는 Shell Script 를 다운로드 하여 해당 Shell Script 를 실행하므로써 **Docker 다운로드 및 설치, 설정을 한번에 작업 가능**
 
 *작업 진행 경로는 아무곳에서나 진행하여도 무관하나, 사용자 기본 접근 경로 ( `~` )에서 진행하였음*
 
@@ -322,6 +322,8 @@ your-jenkins> sh get-docker.sh
 your-jenkins> docker --version
 Docker version 19.03.6, build 369ce74a3c
 ```
+
+
 
 
 
@@ -341,7 +343,6 @@ Docker 명령어는 공식 사이트 또는 인터넷 등으로 미리 숙지하
 
 ##### Create new job
 
-
 `Jenkins 대시보드` 화면에서 `create new job` 선택
 
 Enter an item name 사용자가 원하는 이름 입력
@@ -350,17 +351,16 @@ Freestyle project 선택
 
 OK 클릭
 
+`General 탭`의 `Build 섹션`에서 `Add build step` Drop Down 을 펼쳐 `Execute shell` 선택
 
-General 탭의 Build 섹션에서 Add build step 을 선택하여 Execute shell 선택
+Command 입력 창에 Docker Hub 에서 기본적으로 제공하는 `hello-world` **이미지를 다운로드** 하고, 해당 이미지의 **컨테이너를 실행**하는 명령어를 입력
 
-Command 입력 창에 Git Hub 에 등록되어 Docker Hub 에서 업로드 된 이미지를 다운로드 하고, 해당 이미지의 컨테이너를 실행하는 명령어를 입력
+```sh
 docker pull {your-docker-image-name}
 docker run {your-docker-image-name}
-
+```
 
 Jenkins 대시보드로 이동하여 
-
-Case 1
 
 생성된 job 이 존재하지 않는 경우 아래 화면에서 `create new jobs` 를 선택
 또는, 왼쪽 메뉴에서 New Item 선택
@@ -374,356 +374,23 @@ Freestyle project 선택
 
 OK 클릭
 
-
-
-생성된 job 이 존재하는 경우 job 목록에서 해당 job 의 Name 을 선택
-
-해당 Project {your-jon-name} 으로 이동
-
-Project {your-jon-name} 화면에서 왼쪽 메뉴에서 Build Now 를 선택하면 왼쪽 메뉴 바로 아래에 Build History 에 실행 한 횟수에 따라 #X 와 실행 날짜가 생성 됨
-<--- 해당 빌드(#X)를 클릭하여 상세 화면으로 이동하여 화면 왼쪽 메뉴에서 Console Output 를 클릭하면 로그를 정보를 확인할 수 있음
-
-정상적으로 빌드 완료 후, 브라우져에서 어플리케이션을 테스트할 수 있는 URL(http://your-ec2-ip:your-local-port/xxx) 로 테스트
+해당 `Project {your-jon-name}` 화면 으로 이동
 
 #### Step 2
 
 ##### Build now
 
+`Project {your-jon-name}` 화면 왼쪽 메뉴에서 `Build Now` 를 선택하여 빌드 진행
 
+왼쪽 메뉴 아래에 `Build History` 에 실행 한 횟수에 따라 `#{auto-jenkins-build-index}` 와 실행 날짜가 생성되어 표시 됨
 
-
-Docker Hub 에 등록되어 공개되어 있는 image 를 검색하는 명령어
-
-docker **search** `{your-docker-image-name-search-keyword}`
-
-Docker Hub 로 부터 해당 image 를 로컬 저장소로 다운로드 하는 명령어
-
-docker **pull** `{your-docker-image-name}`
-
-```sh
-your-terminal> docker pull hello-world
-```
-
-#### Step 2
-
-##### List images in local Docker
-
-docker images
-
-```sh
-your-terminal> docker images
-
-REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
-hello-world                    latest              fce289e99eb9        14 months ago       1.84kB
-```
+*해당 빌드(`#X`)를 클릭하여 상세 화면으로 이동하여 화면 왼쪽 메뉴에서 `Console Output` 을 클릭하여 빌드 진행 관련 로그를 정보를 확인할 수 있음*
 
 #### Step 3
 
-##### Run container
+##### Test
 
-docker **run** `{your-docker-image-name}`
-
-```sh
-your-terminal> docker run hello-world
-
-Hello from Docker!
-This message shows that your installation appears to be working correctly.
-
-To generate this message, Docker took the following steps:
- 1. The Docker client contacted the Docker daemon.
- 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
-    (amd64)
- 3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
- 4. The Docker daemon streamed that output to the Docker client, which sent it
-    to your terminal.
-
-To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
-
-Share images, automate workflows, and more with a free Docker ID:
- https://hub.docker.com/
-
-For more examples and ideas, visit:
- https://docs.docker.com/get-started/
-```
-
-#### Step 4
-
-##### List containers in Docker
-
-docker **ps -a**
-
-```sh
-your-terminal> docker ps -a
-
-CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                     PORTS                         NAMES
-d3d5ae2842b1        hello-world         "/hello"                 3 minutes ago       Exited (0) 3 minutes ago                         sad_haibt
-```
-
-#### Step 5
-
-##### Stop container
-
-docker **stop** `{your-docker-container-id}`
-
-```sh
-your-terminal> docker stop hello-world
-```
-
-#### Step 6
-
-##### Remove container
-
-docker **rm** `{your-docker-container-id}`
-
-```sh
-your-terminal> docker rm hello-world
-```
-
-#### Step 7
-
-##### Remove image
-
-임의의 이미지를 삭제하려는 경우 해당 이미지가 컨테이너에 의존되어 있고 컨테이너가 중지되었든 구동되고 있든 상관없이 **컨테이너가 존재하면 이미지 삭제 불가**
-
-docker **rmi** `{your-docker-container-id}`
-
-```sh
-your-terminal> docker rmi hello-world
-```
-
-
-
-<!-- ATTACH -->
-
-
-
-## Attach
-
-### Docker command
-
-[Use the Docker command line](https://docs.docker.com/engine/reference/commandline/cli/)
-
-모든 명령어의 뒤에 `--help` 를 입력하면 해당 명령어의 사용법이 표기 됨
-
-```sh
-your-terminal> docker xxxx --help
-```
-
-<!--
-<details>
-  <summary>
-    <i>Clickable Collapse Link</i>
-    <a href="https://your-reference-url"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Another Reference Link</a>
-  </summary>
-  <p>
-    your contents
-  </p>
-</details>
--->
-
-<details>
-  <summary>
-    <i>Click to view the document</i>
-    <a href="https://docs.docker.com/engine/reference/commandline/cli/"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Use the Docker command line</a>
-  </summary>
-
-> ## About image
-
-<blockquote>
-
-> ### 보유 이미지 목록 조회
-
-<blockquote>
-
-*docker* **images**
-
-```sh
-your-terminal> docker images
-```
-
-</blockquote>
-
-> ### 이미지 이름 조회
-
-<blockquote>
-
-*docker* **search {your-docker-image-name-search-keyword}**
-
-```sh
-your-terminal> docker search hello
-```
-
-</blockquote>
-
-> ### 이미지 다운로드
-
-<blockquote>
-
-*docker* **pull {your-docker-image-name}:{your-docker-image-version}**
-
-```sh
-your-terminal> docker pull hello-world:latest
-
-your-terminal> docker pull hello-world:0.1.9
-```
-
-</blockquote>
-
-> ### 이미지 삭제
-
-<blockquote>
-
-*docker* **rmi {your-docker-image-id}**
-
-```sh
-your-terminal> docker rmi 1f1b68f35fa5
-```
-
-</blockquote>
-
-> ### 이미지 전체 삭제
-
-<blockquote>
-
-docker rmi \`docker images\`
-
-```sh
-your-terminal> docker rmi \`docker images\`
-```
-
-</blockquote>
-
-</blockquote>
-
-> ## About container
-
-<blockquote>
-
-> ### 보유 컨테이너 목록 조회
-
-<blockquote>
-
-docker ps \[-a\]
-
-\[-a\]
-
-|옵션|설명|형식|예시|
-|---|---|---|---|
-|-a|all. 중지되었거나 구동중인 모든 컨테이너 포함|N/A|-a|
-
-```sh
-your-terminal> docker ps
-
-your-terminal> docker ps -a
-```
-
-</blockquote>
-
-> ### 컨테이너 실행
-
-<blockquote>
-  
-docker run [options] image[:TAG|@DIGEST] [COMMAND] [ARG...]
-
-```sh
-your-terminal> docker run --rm -d -p 9090:8080 hello-api --name api
-```
-
-\[options\]
-
-|옵션|설명|형식|예시|
-|---|---|---|---|
-|-d|detached mode. 백그라운드 모드|N/A|-d|
-|-p|port. 호스트와 컨테이너의 포트를 연결 (포워딩)|호스트 포트:컨테이너 포트| -p 9090:8080 |
-|-v|volume. 호스트와 컨테이너의 디렉토리를 연결 (마운트)|호스트 디렉토리 경로:컨테이너 디렉토리 경로|-v /your/dir/path:/var/www/http|
-|-e|enviroment. 컨테이너 내에서 사용할 환경변수 설정|...|...|
-|--name|컨테이너 이름 설정|컨테이너 이름|a-container thecontainer|
-|--it|컨테이너의 표준 입력과 로컬 컴퓨터의 키보드 입력을 연결|N/A|-it|
-|--rm|remove. 프로세스 종료시 컨테이너 자동 제거|컨테이너 ID|--rm 1f1b68f35fa5|
-|--link|컨테이너 연결|컨테이너 이름:별칭|a-container:mycontainer|
-
-</blockquote>
-
-> ### 컨테이너 시작
-
-<blockquote>
-
-docker start {your-docker-container-id-or-name}
-
-```sh
-your-terminal> docker start 1f1b68f35fa5
-
-your-terminal> docker start hello-world
-```
-
-</blockquote>
-
-> ### 컨테이너 재시작
-
-<blockquote>
-
-docker restart {your-docker-container-id-or-name}
-
-```sh
-your-terminal> docker restart 1f1b68f35fa5
-
-your-terminal> docker restart hello-world
-```
-
-</blockquote>
-
-> ### 컨테이너 접속
-
-<blockquote>
-
-docker attach {your-docker-container-id-or-name}
-
-```sh
-your-terminal> docker attach 1f1b68f35fa5
-
-your-terminal> docker attach hello-world
-```
-
-</blockquote>
-
-> ### 컨테이너 중지
-
-<blockquote>
-
-docker stop {your-docker-container-id-or-name}
-
-```sh
-your-terminal> docker stop 1f1b68f35fa5
-
-your-terminal> docker stop hello-world
-```
-
-`exit` 을 입력하거나 `control + D` 를 누르면 **컨테이너를 중지시킬 수 있음**
-
-`control + P` ---> `control + Q` 를 순서대로 누르면 **컨테이너를 중지시키지 않을 수 있음**
-
-</blockquote>
-
-> ## sudo 입력없이 명령어 사용할 수 있는 팁
-
-<blockquote>
-
-Case 1
-현재 접속중인 사용자에게 sudo 권한 부여
-
-your-terminal> sudo usermod -aG docker $USER
-
-Case 2
-임의의 사용자에게 sudo 권한 부여
-your-terminal> sudo usermod -aG docker {your-user}
-
-</blockquote>
-
-</blockquote>
-
-</details>
+정상적으로 빌드 완료 후, 브라우져에서 어플리케이션을 테스트할 수 있는 URL(http://{your-asw-ec2-pivarte-ip}:{your-host-inbound-port}/{your-application-test-url}) 로 테스트
 
 
 
