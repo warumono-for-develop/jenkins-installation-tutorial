@@ -143,14 +143,17 @@ Jenkins 를 사용하는 이유 :
 |---|----|------|------|------|---|---|
 |1|AWS|웹 브라우져|EC2 설치|EC2 정상 구동|||
 |2|AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Docker 설치](https://github.com/warumono-for-develop/docker-installation-tutorial#Installation)||
-|2|AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Docker 구동](https://github.com/warumono-for-develop/docker-installation-tutorial#usage)|AWS EC2 용 Docker|
-|3|AWS EC2|터미널|Jenkins 설치|Jenkins 정상 설치|[Jenkins 설치](#jenkins-설치)||
-|3|AWS EC2|터미널|Jenkins 설정|Jenkins 정상 구동|[Jenkins 설정](#jenkins-설정)||
-|4|Jenkins in AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Install Docker in Jenkins](#install-docker-in-jenkins)|Jenkins 용 또 다른 Docker|
-|4|Jenkins in AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Install Docker in Jenkins](#install-docker-in-jenkins)|Jenkins 용 또 다른 Docker|
-|6|Jenkins in AWS EC2|터미널|job 생성|job 정상 생성|[Create new job](#create-new-job)||
-|7|Jenkins in AWS EC2|터미널|job 빌드|Docker 이미지 다운로드 및 실행|[Build now](#build-now)||
-|8|Jenkins in AWS EC2|터미널|job 로그 확인|Docker 이미지 정상 구동 확인|[Test](#test)||
+|3|AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Docker 구동](https://github.com/warumono-for-develop/docker-installation-tutorial#usage)|AWS EC2 용 Docker|
+|4|AWS EC2|터미널|Jenkins 설치|Jenkins 정상 설치|[Jenkins 설치](#jenkins-설치)||
+|5|AWS EC2|터미널|Jenkins 설정|Jenkins 정상 구동|[Jenkins 설정](#jenkins-설정)||
+|6|Jenkins in AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Install Docker in Jenkins](#install-docker-in-jenkins)|Jenkins 용 또 다른 Docker|
+|7|Jenkins in AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Install Docker in Jenkins](#install-docker-in-jenkins)|Jenkins 용 또 다른 Docker|
+|8|Jenkins in AWS EC2|터미널|Jenkins job 생성|job 정상 생성|[Create new job](#create-new-job)||
+|9|Jenkins in AWS EC2|터미널|Jenkins job 빌드|Docker 이미지 다운로드 및 실행|[Build now](#build-now)||
+|10|Jenkins in AWS EC2|터미널|Jenkins job 로그 확인|Docker 이미지 정상 구동 확인|[빌드 Test](#빌드-test)||
+|11|Jenkins in AWS EC2|터미널|Jenkins 설정|원격 빌드 활성화|[Jenkins 원격 빌드 설정](#jenkins-원격-빌드-설정)||
+|12|Jenkins in AWS EC2|터미널|Jenkins job 원격 빌드|원격 빌드 확인|[원격 빌드 Test](#원격-빌드-test)||
+|13|Jenkins in AWS EC2|터미널|Jenkins job 원격 빌드 로그 확인|Docker 이미지 정상 구동 확인|[원격 빌드 Test](#원격-빌드-test)||
 
 
 
