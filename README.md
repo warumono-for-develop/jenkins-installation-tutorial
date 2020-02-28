@@ -483,9 +483,23 @@ Progress bar 가 나타나 진행 상태를 보여주며 빌드 오류 시 `빨�
 
 curl -X POST http://{your-jenkins-username}:{your-jenkins-api-token}@{your-host-ip:your-jenkins-port}/job/{your-jenkins-job-name}/build?token={your-jenkins-authentication-token}
 
+
+#### Create First Admin User
+
+`Create First Admin User` 화면에서 사용자 계정 정보를 입력하여 저장 (`Save and Finish`)
+
+</blockquote>
+
+> #### Step 6
+
+<blockquote>
+
+#### Instance Configuration
+
+
 |변수|설명|참조|비고|
 |---|---|---|---|
-|your-jenkins-username|Jenkins 사용자 아이디|참조||
+|your-jenkins-username|Jenkins 사용자 아이디|[Create First Admin User](#create-first-admin-user)||
 |your-jenkins-api-token|Jenkins 사용자 API Token|참조||
 |your-host-ip:your-jenkins-port|Jenkins 호스트 서버 IP|참조||
 |your-jenkins-job-name|빌드 대상 Jenkins job Name|참조||
