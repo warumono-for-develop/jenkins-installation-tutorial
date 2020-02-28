@@ -408,7 +408,7 @@ curl 명령어 또는 웹 브라우져의 URL 입력 창에 원격 빌드 접근
 
 <blockquote>
 
-~~#### CSRF 비활성화~~
+#### CSRF 비활성화
 
 ~~`Jenkins 대시보드` 화면에서 왼쪽 메뉴 중 `Manage Jenkins` 선택~~
 
