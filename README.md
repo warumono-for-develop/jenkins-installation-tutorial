@@ -106,6 +106,8 @@ Jenkins 를 사용하는 이유 :
 - [x] [Docker](https://www.docker.com/)
 
   Docker version 19.03.6
+  
+  [Docker Installation Tutorial](https://github.com/warumono-for-develop/docker-installation-tutorial)
 
 - [x] [AWS](https://aws.amazon.com/ko/) EC2 Instance
 
@@ -125,7 +127,7 @@ Jenkins 를 사용하는 이유 :
 
 ## Getting Started
 
-Docker 설치는 터미널을 이용하여 명령어를 입력하는 작업이 많으므로 진행 순서와 오탈자에 주의
+Jenkins 설치는 터미널을 이용하여 명령어를 입력하는 작업이 많으므로 진행 순서와 오탈자에 주의
 
 *본 작업을 진행에 앞서 프로그램을 설치할 대상 서버는 반드시 백업 완료 후 진행할 것을 권장*
 
@@ -274,6 +276,12 @@ your-jenkins>
 ###### Step 9
 
 ###### Install Docker in Jenkins
+
+[Required](#required) [Docker Installation Tutorial](https://github.com/warumono-for-develop/docker-installation-tutorial) 과 혼돈하지 말아야 함
+
+[기존에 설치되어 있는 Docker](#required) 는 **`로컬` 또는 `호스트 서버`에 설치되어 있는 Docker**
+
+본 순서에서 진행하는 Docker 설치는 **`Jenkins 내부`에서 사용하게 되는 Docker**
 
 Docker 공식 사이트에서 제공하는 Shell Script 를 다운로드 하여 해당 Shell Script 를 실행하므로써 **Docker 다운로드 및 설치를 한번에 작업 가능**
 
