@@ -85,7 +85,7 @@
 
 Jenkins 를 사용하는 이유 :
 * 배포 자동화에 따른 개발에 집중 가능
-* 원결 배포 가능
+* 원격 배포 가능
 
 *Jeninks 외 다른 프로그램 또는 그 외 방법들도 있겠지만, Jenkins 프로그램을 써보는 것도 추천*
 
@@ -127,10 +127,10 @@ Jenkins 를 사용하는 이유 :
 
 ## Preview
 
-전반적으로 소소한 설정 작업이 많아, 전체적인 작업 순서를 간략하게 기술
+전반적으로 소소한 설정 작업이 많아, 전반적인 작업 순서를 간략하게 기술
 
 |순서|작업장|작업도구|작업내용|작업결과|참조|비고|
-|---|----|------|------|------|-----|---|
+|---|----|------|------|------|---|---|
 |1|AWS|웹 브라우져|EC2 설치|EC2 정상 구동|||
 |2|AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Docker 설치](https://github.com/warumono-for-develop/docker-installation-tutorial#Installation){:target="_blank"}||
 |2|AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Docker 구동](https://github.com/warumono-for-develop/docker-installation-tutorial#usage){:target="_blank"}|AWS EC2 용 Docker|
@@ -138,9 +138,9 @@ Jenkins 를 사용하는 이유 :
 |3|AWS EC2|터미널|Jenkins 설정|Jenkins 정상 구동|[Jenkins 설정](#jenkins-설정)||
 |4|Jenkins in AWS EC2|터미널|Docker 설치|Docker 정상 설치|[Install Docker in Jenkins](#install-docker-in-jenkins)|Jenkins 용 또 다른 Docker|
 |4|Jenkins in AWS EC2|터미널|Docker 설정|Docker 정상 구동|[Install Docker in Jenkins](#install-docker-in-jenkins)|Jenkins 용 또 다른 Docker|
-|6|Jenkins in AWS EC2|터미널|job 생성|job 정상 생성|[1](#aaa)||
-|7|Jenkins in AWS EC2|터미널|job 빌드|Docker 이미지 다운로드 및 실행|[1](#aaa)||
-|8|Jenkins in AWS EC2|터미널|job 로그 확인|Docker 이미지 정상 구동 확인|[1](#aaa)||
+|6|Jenkins in AWS EC2|터미널|job 생성|job 정상 생성|[Create new job](#create-new-job)||
+|7|Jenkins in AWS EC2|터미널|job 빌드|Docker 이미지 다운로드 및 실행|[Build now](#build-now)||
+|8|Jenkins in AWS EC2|터미널|job 로그 확인|Docker 이미지 정상 구동 확인|[Test](#test)||
 
 
 
@@ -255,7 +255,7 @@ Jenkins 최초 화면에서 비밀번호 입력에 관한 내용과 입력 창�
 
 ###### Create First Admin User
 
-`Create First Admin User` 화면에서 사용자 계정 정보를 입력하여 저장(Save and Finish)
+`Create First Admin User` 화면에서 사용자 계정 정보를 입력하여 저장 (`Save and Finish`)
 
 ###### Step 6
 
@@ -281,7 +281,7 @@ Jenkins 는 임의의 어플리케이션을 갖고 있어야 하기에 이 어�
 
 단, Jenkins 내부에 Docker 를 설치하지 않고 외부의 Docker 와 연동하는 방법도 존재하지만 본 설명서에는 Jenkins 내부에 Docker 를 설치하여 구동하는 것을 설명
 
-Jenkins 가 구동되어 있는 상태에서 진행하여야 하며, Docker 를 설치 과정은 Jenkins 내부로 접속하는 것부터 시작
+**Jenkins 가 구동되어 있는 상태에서 진행**하여야 하며, Docker 를 설치 과정은 **Jenkins 내부로 접속**하는 것부터 시작
 
 *docker* **exec -it *{your-jenkins-container-id}* /bin/bash**
 
@@ -325,8 +325,6 @@ Docker version 19.03.6, build 369ce74a3c
 
 
 
-
-
 <!-- USAGE EXAMPLES -->
 
 
@@ -337,44 +335,28 @@ Docker version 19.03.6, build 369ce74a3c
 
 Docker 명령어는 공식 사이트 또는 인터넷 등으로 미리 숙지하고 사용하는 것을 권장
 
-본 설명글에는 *[자주 사용하는 명령어](#docker-command)* 를 간략하게 설명하였으니 참고하여 숙지하고 연습하기 권장
+본 설명글에는 *[자주 사용하는 명령어](#docker-command)* 를 간략하게 설명하였으니 참고하여 숙지하고 연습하기를 권장
 
 #### Step 1
 
 ##### Create new job
 
-`Jenkins 대시보드` 화면에서 `create new job` 선택
+`Jenkins 대시보드` 화면에서 생성된 job 이 존재하지 않는 경우 아래 화면에서 `create new jobs` 를 선택
 
-Enter an item name 사용자가 원하는 이름 입력
+`Enter an item name` 사용자가 원하는 이름 입력 (일반적으로 구동하고자 하는 대상 어플리케이션의 이름을 토대로 입력)
 
-Freestyle project 선택
+`Freestyle project` 선택
 
-OK 클릭
+`OK` 클릭
 
 `General 탭`의 `Build 섹션`에서 `Add build step` Drop Down 을 펼쳐 `Execute shell` 선택
 
-Command 입력 창에 Docker Hub 에서 기본적으로 제공하는 `hello-world` **이미지를 다운로드** 하고, 해당 이미지의 **컨테이너를 실행**하는 명령어를 입력
+`Command` 입력 창이 나타나고, 이 입력 창에 Docker Hub 에서 기본적으로 제공하는 `hello-world` **이미지를 다운로드** 하고, 해당 이미지의 **컨테이너를 실행**하는 명령어를 입력
 
 ```sh
 docker pull {your-docker-image-name}
 docker run {your-docker-image-name}
 ```
-
-Jenkins 대시보드로 이동하여 
-
-생성된 job 이 존재하지 않는 경우 아래 화면에서 `create new jobs` 를 선택
-또는, 왼쪽 메뉴에서 New Item 선택
-
-    Welcome to Jenkins!
-    Please create new jobs to get started.
-
-Enter an item name 사용자가 원하는 이름 입력
-
-Freestyle project 선택
-
-OK 클릭
-
-해당 `Project {your-jon-name}` 화면 으로 이동
 
 #### Step 2
 
@@ -389,6 +371,11 @@ OK 클릭
 #### Step 3
 
 ##### Test
+
+해당 빌드(`#X`)를 클릭하여 상세 화면으로 이동하여 화면 왼쪽 메뉴에서 `Console Output` 을 클릭
+
+빌드 관련 로그 및 어플리케이션의 로그 등이 표시되어 나타남
+
 
 정상적으로 빌드 완료 후, 브라우져에서 어플리케이션을 테스트할 수 있는 URL(http://{your-asw-ec2-pivarte-ip}:{your-host-inbound-port}/{your-application-test-url}) 로 테스트
 
