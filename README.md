@@ -51,22 +51,22 @@
   * [References](#references)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-    * [Step 1 Jenkins 설치](#step-1-jenkins-설치)
-    * [Step 2 Jenkins 구동](#step-2-jenkins-구동)
-    * [Step 3 Jenkins 설정](#step-3-jenkins 설정)
-      * [Step 1 임시 비밀번호 찾기](#step-임시-비밀번호-찾기)
-      * [Step 2 Jenkins 접속](#step-2-jenkins-접속)
-      * [Step 3 Customize Jenkins](#step-3-customize-jenkins)
-      * [Step 4 Getting Started](#step-4-getting-started)
-      * [Step 5 Create First Admin User](#step-5-create-first-admin-user)
-      * [Step 6 Instance Configuration](#step-6-instance-configuration)
-      * [Step 7 Jenkins is ready!](#step-7-jenkins-is-ready!)
-      * [Step 8 Connect into Jenkins](#step-8-connect-into-jenkins)
-      * [Step 9 Install Docker in Jenkins](#step-9-install-docker-in-jenkins)
+    * [Step 1 Jenkins 설치](#jenkins-설치)
+    * [Step 2 Jenkins 구동](#jenkins-구동)
+    * [Step 3 Jenkins 설정](#jenkins-설정)
+      * [Step 1 임시 비밀번호 찾기](#임시-비밀번호-찾기)
+      * [Step 2 Jenkins 접속](#jenkins-접속)
+      * [Step 3 Customize Jenkins](#customize-jenkins)
+      * [Step 4 Plugins in Getting Started](#plugins-in-getting-started)
+      * [Step 5 Create First Admin User](#create-first-admin-user)
+      * [Step 6 Instance Configuration](#instance-configuration)
+      * [Step 7 Jenkins is ready!](#jenkins-is-ready!)
+      * [Step 8 Connect into Jenkins](#connect-into-jenkins)
+      * [Step 9 Install Docker in Jenkins](#install-docker-in-jenkins)
 * [Usage](#usage)
-  * [Step 1 Create new job](#step-1#create-new-job)
-  * [Step 2 Build now](#step-2#build-now)
-  * [Step 3 Test](#step-3#test)
+  * [Step 1 Create new job](#create-new-job)
+  * [Step 2 Build now](#build-now)
+  * [Step 3 Test](#test)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -249,7 +249,7 @@ Jenkins 최초 화면에서 비밀번호 입력에 관한 내용과 입력 창�
 
 ###### Step 4
 
-###### Getting Started
+###### Plugins in Getting Started
 
 `Getting Started` 화면에서 플러그인 목록이 나열되어 있고 자동으로 해당 플러그인들을 다운로드 및 설치 함
 
