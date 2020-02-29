@@ -22,7 +22,7 @@
   <h1 align="center">Jenkins Inatallation Tutorial</h1>
 
   <p align="center">
-    AWS EC2 인스턴스에 Jenkins 프로그램 설치 관련 지침서
+    Jenkins 프로그램 설치 관련 지침서
     <br />
     <a href="https://github.com/warumono-for-develop/jenkins-installation-tutorial"><strong>Explore the docs »</strong></a>
     <br />
