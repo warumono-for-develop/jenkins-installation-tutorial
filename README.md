@@ -280,7 +280,7 @@ hello-jenkins-build-authentication-token
 #### CSRF 비활성화
 
 ~~`Jenkins Dashboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Manage Jenkins` 클릭 &nbsp; > &nbsp; 설치되어 있는 Plugin 목록 중 `Configure Global Security` 선택 &nbsp; > &nbsp; 화면 중간 부분 `Prevent Cross Site Request Forgery exploits` **체크박스 비활성화**~~   
-*본 지침서 초반, Docker image `jenkins/jenkins` 가 아닌 `jenkins` 를 설치하여 사용할 경우에는 CSRF 비활성화 작업을 진행하여야 했지만, 작성자의 경우 `jenkins/jenkins` 를 설치하여 사용해보니 CSRF 비활성화 설정은 기본으로 되어 있는 것인지 해당 설정에 대한 항목이 없었지만, Docker image jenkins/jenkins 가 아닌 경우에 설정해야할 작업이므로 설명에는 남겨 놓음*
+*본 지침서 작성 초기, Docker image `jenkins/jenkins` 가 아닌 `jenkins` 를 설치하여 사용할 경우에는 CSRF 비활성화 설정을 하였지만 이 후, `jenkins/jenkins` 를 설치하여 사용해보니 CSRF 비활성화 설정은 기본으로 되어 있는 것인지(?) 해당 항목은 없는 것을 확인하고, 혹 Docker image jenkins 를 설치하여 사용하는 경우에는 설정해야하므로 설명에는 남겨 놓음*
 
 #### API Token 생성
 
@@ -344,7 +344,7 @@ echo "Hello Jenkins!"
   Feb 29, 2020 11:06 PM KST
 ``` 
 
-#### Log
+### Log
 
 빌드 관련 로그 확인
 
@@ -368,13 +368,11 @@ Hello Jenkins!
 Finished: SUCCESS
 ```
 
-여기서는 아주 간단한 빌드 작업을 진행하였지만 일반적으로 개발 과정 중 순차적으로 진행되는 리소스 형상관리, 빌드 및 배포 작업을 번거롭게 개발자가 직접 하나 하나 작업하던 것을 Jenkins 빌드 작업으로 일괄 작업할 수 있음    
+본 지침서에서는 아주 간단한 빌드 작업을 진행하였지만 일반적으로 개발 과정 중 순차적으로 진행되는 리소스 형상관리, 빌드 및 배포 작업을 번거롭게 개발자가 직접 하나 하나 작업하던 것을 Jenkins 빌드 작업으로 일괄 처리할 수 있음    
 Github 과 연동하여 Github repository 를 다운로드 (git pull) 하여 해당 repository 를 빌드 후 서버에 배포 한다거나,    
-Docker Hub 의 image 를 다운로드 (docker pull) 하여 빌드 (docker build) 후 실행 (docker run) 하는 작업 진행을 스크립트에 작성하여 번거로운 작업을 일괄적으로 할 수 있음   
-Jenkins 에서 제공하는 plugin 들을 사용하여 보다 복잡하고 번거로운 작업을 일괄적으로 처리하는 것이 가능
+Docker Hub 의 image 를 다운로드 (docker pull) 하여 빌드 (docker build) 후 실행 (docker run) 하는 작업 진행을 스크립트 작성 및 Plugin 등을 사용하여 번거로운 작업을 일괄적으로 처리할 수 있음
 
-
-#### Jenkin 원격 빌드
+### Jenkin 원격 빌드
 
 > curl -X POST http://{your-jenkins-username}:{your-jenkins-access-api-token}@{your-host-ip}:{your-jenkins-host-port}/job/{your-jenkins-job-name}/build?token={your-jenkins-job-build-authentication-token}
 
@@ -391,11 +389,11 @@ Jenkins 에서 제공하는 plugin 들을 사용하여 보다 복잡하고 번�
 your-terminal> curl -X POST http://warumono:a3t32p94xe400rr29fb34abc41doofee@54.081.311.162:8080/job/hello-jenkins/build?token=hello-jenkins-build-authentication-token
 ```
 
-정상적으로 원격 빌드 작업을 수행하였다면, [Log](#log) 설명과 같은 절차로 빌드 결과를 확인할 수 있음    
+정상적으로 원격 빌드 작업을 수행하였다면, [Log](#log) 설명과 같은 절차로 빌드 결과 확인    
 단, [Log](#log) 설명 내의 로그 정보 중 **첫번째 줄의 정보**가 다음과 같은 차이점이 있음
 
-> Jenkins 내부에서 직접 빌드 작업한 경우 **Started by `remote host` \<your-remote-ip\>**   
-> 외부에서 Jenkins 원격 빌드 작업한 경우 **Started by `user` \<your-jenkins-username\>**
+> 외부에서 Jenkins `원격 빌드` 한 경우 **Started by `remote host` \<your-remote-ip\>**   
+> Jenkins 내부에서 `직접 빌드` 한 경우 **Started by `user` \<your-jenkins-username\>**
 
 ```sh
 Started by remote host 54.081.311.162
@@ -406,6 +404,7 @@ Building in workspace /var/jenkins_home/workspace/hello-jenkins
 Hello Jenkins!
 Finished: SUCCESS
 ```
+
 
 
 ## FAQ
