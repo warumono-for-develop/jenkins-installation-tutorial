@@ -344,7 +344,7 @@ echo "Hello Jenkins!"
 빌드 결과에 따라 실패는 `빨간색`, 정상은 `파란색` 으로 표시됨
 
 > #\<your-jenkins-job-build-index\>   
->   <your-jenkins-job-build-date>
+> &nbsp; &nbsp; \<your-jenkins-job-build-date\>
 
 ```sh
 #1
@@ -399,8 +399,8 @@ your-terminal> curl -X POST http://warumono:a3t32p94xe400rr29fb34abc41doofee@54.
 정상적으로 원격 빌드 작업을 수행하였다면, [Log](#log) 설명과 같은 절차로 빌드 결과 확인    
 단, [Log](#log) 설명 내의 로그 정보 중 **첫번째 줄의 정보**가 다음과 같은 차이점이 있음
 
-> 외부에서 Jenkins `원격 빌드` 한 경우 **Started by `remote host` \<your-remote-ip\>**   
-> Jenkins 내부에서 `직접 빌드` 한 경우 **Started by `user` \<your-jenkins-username\>**
+Jenkins 외부에서 `원격 빌드` 한 경우 **Started by `remote host` \<your-remote-ip\>**   
+Jenkins 내부에서 `직접 빌드` 한 경우 **Started by `user` \<your-jenkins-username\>**
 
 ```sh
 Started by remote host 54.081.311.162
