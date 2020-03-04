@@ -112,6 +112,35 @@ Install Jenkins
 your-terminal> docker run -d -p 8090:8080 -v /home/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins/jenkins
 ```
 
+### Step 2
+
+Install Docker in Jenkins
+
+기존 Docker ([Docker Installation Tutorial](https://github.com/warumono-for-develop/docker-installation-tutorial) 에 의해 설치한 Docker) 는 **`로컬` 또는 `호스트 서버` 에 설치되어 있는 Docker**    
+지금 설치할 Docker 는 **`Jenkins 내부` 에 설치하는 Docker** 이니 혼돈하지 않아야 함
+
+Docker 설치 Shell Script 파일을 다운로드 후, 해당 Shell Script 를 실행하여 **Docker 다운로드 및 설치, 설정을 한번에 일괄 작업**   
+[Docker](https://www.docker.com/) 공식 [Github](https://github.com/docker/docker-install) 참조
+
+Docker 명령어를 사용하여 **Jenkins 내부에 접속한 상태**에서 진행    
+작업 완료 후, `exit` 을 입력하여 Jenkins 로 부터 나옴
+
+> curl -fsSL https://get.docker.com -o get-docker.sh    
+> sh get-docker.sh
+
+```sh
+jenkins-terminal> cd ~
+jenkins-terminal> curl -fsSL https://get.docker.com -o get-docker.sh
+jenkins-terminal> ls
+get-docker.sh
+jenkins-terminal> sh get-docker.sh
+...
+jenkins-terminal> docker --version
+Docker version 19.03.6, build 369ce74a3c
+jenkins-terminal> exit
+your-terminal> 
+```
+
 ### Step 3
 
 Configure Jenkins
@@ -160,6 +189,10 @@ Docker 명령어를 사용하여 Jenkins 내부 접속
 > docker exec -it {your-jenkins-container-id} /bin/bash
 
 ```sh
+your-terminal> docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                   PORTS                               NAMES
+367932a46403        jenkins             "/bin/tini -- /usr/l…"   1 hours ago         Up 45 hours              0.0.0.0:8080->8080/tcp, 50000/tcp   funny_golick
+...
 your-terminal> docker exec -it 367932a46403 /bin/bash
 
 jenkins-terminal> 
@@ -172,7 +205,7 @@ VIM 파일 내용 보기 명령어로 비밀번호 찾기
 > <your-jenkins-administrator-password>
 
 ```sh
-your-terminal> cat /var/jenkins_home//secrets/initialAdminPassword
+jenkins-terminal> cat /var/jenkins_home//secrets/initialAdminPassword
 016b9b01454f418caf2dab842474b351
 ```
 
@@ -199,161 +232,73 @@ your-terminal> cat /var/jenkins_home//secrets/initialAdminPassword
 
 #### Instance Configuration
 
-`Jenkins URL: http://<your-host-ip>:8080/` 기본 설정 값으로 사용
+`Jenkins URL: http://<your-host-ip>:8080/` 기본 설정 값으로 사용   
+
+> http://\<your-host-ip\>:8080
+
+\<your-host-ip\> 에는 AWS EC2 인스턴스의 상세정보 중 **IPv4 Public IP** 가 자동 설정 됨
+
+```sh
+http://54.081.311.162:8080
+```
 
 #### Jenkins is ready!
 
 `Start using Jenkins` 버튼 클릭
 
-정상적으로 설정이 완료되었다면, `Jenkins 대시보드` 화면이 나타남
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Configure Jupyter Notebook
-
-> http://{your-host-ip}:{your-jenkins-port}
-
-AWS EC2 인스턴스 **IPv4 Public IP** 와 `{your-host-port}` 를 웹 브라우져를 실행하여 URL 입력 창에 입력    
-
-```sh
-http://54.081.311.162:8090
-```
-
-사용자가 입력한 비밀번호를 자동변환하여 나온 해시 값은 **메모하여 이 후 설정 단계에서 사용**   
-작업 완료 후, <kbd>control</kbd> + <kbd>Z</kbd> 또는 <kbd>control</kbd> + <kbd>D</kbd> 키 입력으로 python3 에서 나옴
-
-> python3   
-> from notebook.auth import passwd    
-> passwd()
-
-> 'sha1:\<generated-your-password-hash-value\>'
-
-```sh
-your-terminal> python3
-Python 3.6.5 ...
-.....
->> from notebook.auth import passwd
->> passwd()
-Enter password:
-Verify password:
-'sha1:g0bf6y023f60:75h6h014f68d70c03175et61p4675c497b83u63'
-```
-
-### Step 4
-
-Configure Jupyter Notebook
-
-### Caution
-
-> 사용자가 Jupyter Notebook 을 외부 (웹 브라우져) 에서 접속할 경우 AWS EC2 인스턴스의 상세정보 중 **IPv4 Public IP** 를 사용하고, AWS EC2 인스턴스 내부에 설치된 Jupyter Notebook 은 해당 인스턴스의 상세정보 중 **Private IPs** 를 사용하므로 미리 메모    
-> AWS EC2 인스턴스의 **Security Group** 에 *Inbound* 로 *TCP* `{your-jupyter-notebook-port}` 값을 추가해줘야 정상적으로 접속할 수 있음   	
-> *작성자의 AWS EC2 인스턴스는 Elastic IP 미사용, 도메인 미사용 상태로 기본으로 제공되는 IP 정보만으로 설명하고 사용*
-
-설정 파일을 생성하고 VIM 에디터를 사용하여 비밀번호 등의 정보를 입력    
-Jupyter Notebook 은 아이디에 해당하는 계정정보는 없고 **비밀번호만으로 접속**		
-*설정 파일은 Jupyter Notebook 기본 설정 정보가 포함되어 생성 됨*
-
-> jupyter notebook --generate-config    
-> vi ~/.jupyter/jupyter_notebook_config.py
-
-```sh
-your-terminal> jupyter notebook --generate-config
-Writing default config to: /home/ubuntu/.jupyter/jupyter_notebook_config.py
-your-terminal> sudo vi ~/.jupyter/jupyter_notebook_config.py
-```
-
-<details>
-  <summary>[Optional] SSL 사설 인증서 생성</summary> 
-
-SSL 을 사용하지 않아도 Jupyter Notebook 을 사용하는데 문제는 없으나 보안성을 높이기 위하여 사용하는 것을 권장   
-사설 인증서보다는 정상적인 인증기관으로부터 발급받은 인증서를 사용할 것을 권장
-
-
-> openssl req -x509 -nodes -days {valid-days} -newkey rsa:1024 -keyout "{your-juypter-notebook-ssl-keyfile-name}.key" -out "{your-jupyter-notebook-ssl-certfile-name}.pem" -batch
-
-```sh
-your-terminal> mkdir ~/{your-ssl-file-directory-name}
-your-terminal> cd {your-ssl-file-directory-name}
-your-terminal> sudo openssl req -x509 -nodes -days 365 -newkey rsa:1024 -keyout "my-jupyter-notebook-key.key" -out "my-jupyter-notebook-cert.pem" -batch
-your-terminal> ls
-my-jupyter-notebook-key.key  my-jupyter-notebook-cert.pem
-```
-
----
-</details>
-
-설정 파일 기존 내용 마지막 아래에 설정 내용 추가 입력   
-`{your-host-ip}` 는 AWS EC2 인스턴스 상세정보의 **Private IPs**   
-`{your-host-begin-path}` 는 Jupyter Notebook Dashboard 화면 (파일 탐색기와 같은 화면) 에서 AWS EC2 인스턴스 내부 스토리지 중 **실행 시 보여지게 될 경로**로써 자신이 원하는 정확한 경로를 입력    
-
-> c = get_config()    
-> c.NotebookApp.password = u'{generated-your-password-hash-value}'    
-> c.NotebookApp.ip = '{your-host-ip}'    
-> c.NotebookApp.notebook_dir = '{your-host-begin-path}'
-
-```sh
-...
-# ============================================================
-# my jupyter-notebook configuration
-# ============================================================
-c = get_config()
-c.NotebookApp.password = u'sha1:g0bf6y023f60:75h6h014f68d70c03175et61p4675c497b83u63'
-c.NotebookApp.ip = '172.31.35.203'
-c.NotebookApp.notebook_dir = '/home/ubuntu'
-```
-
-<details>
-  <summary>[Optional] SSL 사설 인증서 적용</summary> 
-
-SSL 을 적용하고자 사설 인증서를 생성하였다면, 다음 설정 내용을 추가로 입력
-
-
-> c.NotebookApp.keyfile = u'{your-juypter-notebook-ssl-keyfile-name}.key'   
-> c.NotebookApp.certfile = u'{your-jupyter-notebook-ssl-certfile-name}.pem'
-
-```sh
-...
-c.NotebookApp.notebook_dir = '/home/ubuntu'
-c.NotebookApp.keyfile = u'my-jupyter-notebook-key.key'
-c.NotebookApp.certfile = u'my-jupyter-notebook-cert.pem'
-```
-
----
-</details>
-
-### Step 5
-
-Jupyter Notebook 백그라운드 실행 설정
-
-정상적으로 Jupyter Notebook 의 설치 및 설정이 완료된 후 터미널을 이용하여 실행하고, 해당 터미널을 닫거나 임의로 끊기는 경우에는 Jupyter Notebook 프로그램도 중지가 되므로 이를 방지하기 위하여 백그라운드에서 실행되도록 설정할 것을 권장
-
-> bg    
-> disown -h
-
-```sh
-your-terminal> bg
-[3]+ sudo jupyter-notebook --allow-root &
-your-terminal> disown -h
-```
+정상적으로 설정이 완료되었다면, `Jenkins Dahsboard` 화면이 나타남
 
 
 
 ## Usage
 
-정상적으로 Jupyter Notebook 설치 및 설정이 완료되었다면 실행하여 웹 브라우져로 접근 후 확인
+새로운 빌드 작업 (job) 생성
 
-### Caution
+### Create new job | New Item
+
+`Jenkins Dahsboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `New Item` 선택 (또는, 생성된 job 이 없는 경우 화면 중앙에 `Create new job` 을 클릭하여도 동일함)    
+`Enter an item name` 입력 창에 빌드 작업 이름 입력   
+
+> {your-jenkins-job-name}
+
+```sh
+hello-jenkins
+```
+
+`Freestyle project` 선택    
+`OK` 클릭   
+
+### Configure Build
+
+`General` 탭 화면 &nbsp; > &nbsp; `Build` 섹션 &nbsp; > &nbsp; `Add build step` Drop Down 메뉴 선택 &nbsp; > &nbsp; `Execute shell` 선택    
+`Command` 입력 창이 나타나고, 입력 창에는 Jenkins 빌드 스크립트를 입력    
+
+아주 간단하게 빌드 진행 로그 내용에 {your-comment} 가 나오는 스크립트를 작성     
+
+> echo "{your-comment}"
+
+```sh
+echo "Hello Jenkins!"
+```
+
+`Save` 클릭   
+
+### Build
+
+`Project {your-jenkins-job-name}` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `Build Now` 클릭   
+왼쪽 메뉴 아래에 `Build History` 에 실행 횟수에 따라 `#{auto-jenkins-build-index}` 와 실행 날짜가 생성되어 표시 됨
+
+Progress bar 가 나타나 진행 상태를 보여주며 빌드 오류 시 `빨간색` 으로 표시되고, 정상적인 경우 `파란색` 으로 표시 됨
+
+
+
+
+
+
+
+Docker Hub 에서 기본적으로 제공하는 `hello-world` **이미지를 다운로드** 하고, 해당 이미지의 **컨테이너를 실행**하는 명령어를 입력
+
+
 
 > 앞서 [Step 4](#step-4) 에서 설명한대로 사용자가 Jupyter Notebook 을 외부 (웹 브라우져) 에서 접속할 경우 AWS EC2 인스턴스 상세정보 중 **IPv4 Public IP** 사용
 
