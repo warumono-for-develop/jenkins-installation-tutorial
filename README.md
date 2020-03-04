@@ -88,10 +88,10 @@ Expanded
 Download Jenkins
 
 Jenkins 설치 파일도 존재하나, 본 지침서에서는 Docker 이미지를 사용하여 설치하는 방법으로 설명   
-Jenkins 공식 사이트에서 제공하는 이미지의 이름은 `jenkins` 이나, ~~업데이트 및 관리가 지속적으로 되고 있지 않다는 소문(?)이 있으니~~    
-다른 이미지 이름 `jenkins/jenkins` 이미지를 다운로드 (docker pull) 할 것을 권장
+Jenkins 공식 사이트에서 제공하는 이미지의 이름은 `jenkins` 이나, ~~업데이트 및 관리가 지속적으로 되고 있지 않다는 소문 (?)이 있으니~~    
+다른 이미지 이름 **jenkins/jenkins** 이미지를 다운로드 (docker pull) 할 것을 권장
 
-> docker pull {jenkins-image-name-with-tag}
+> docker pull jenkins/jenkins
 
 ```sh
 your-terminal> docker search jenkins
@@ -153,7 +153,7 @@ Configure Jenkins
 
 #### Unlock Jenins
 
-Jenkins 설치 후 최초 화면에서 비밀번호 (Jeknins 계정 비밀번호 아님) 가 필요하며, 이는 Docker 의 로그 정보에서 찾을 수 있음   
+Jenkins 설치 후 최초 화면에서 비밀번호 (Jenkins 계정 비밀번호 아님) 가 필요하며, 이는 Docker 의 로그 정보에서 찾을 수 있음   
 *해당 비밀번호는 설치 시 Jenkins 내부 파일 (Jenkins 최초 화면에 표시되어 있는 경로 `{your-jenkins-home-path}/secrets/initialAdminPassword`) 에 저장되어 있음*
 
 Docker 의 로그 정보 확인  
@@ -186,7 +186,7 @@ This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
 
 Docker jenkins 이미지를 사용하여 Jenkins 를 설치하는 경우에는 Docker container 즉, Jenkins container 내부로 접속하여야 내부 파일에 접근 가능   
 
-Docker 명령어를 사용하여 Jenkins 내부 접속
+#### Docker 명령어를 사용하여 Jenkins 내부 접속
 
 > docker exec -it {your-jenkins-container-id} /bin/bash
 
@@ -196,11 +196,10 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 367932a46403        jenkins             "/bin/tini -- /usr/l…"   1 hours ago         Up 45 hours              0.0.0.0:8080->8080/tcp, 50000/tcp   funny_golick
 ...
 your-terminal> docker exec -it 367932a46403 /bin/bash
-
 jenkins-terminal> 
 ```
 
-VIM 파일 내용 보기 명령어로 비밀번호 찾기
+#### VIM 파일 내용 보기 명령어로 비밀번호 찾기
 
 > cat {your-jenkins-home-path}/secrets/initialAdminPassword
 
@@ -246,7 +245,7 @@ jenkins-terminal> cat /var/jenkins_home//secrets/initialAdminPassword
 
 #### Instance Configuration
 
-`Jenkins URL: http://<your-host-ip>:8080/` 기본 설정 값으로 사용   
+`Jenkins URL: http://<your-host-ip>:8080/` 기본 설정 값으로 설정   
 
 > http://\<your-host-ip\>:8080
 
@@ -282,7 +281,7 @@ hello-jenkins-build-authentication-token
 #### CSRF 비활성화
 
 ~~`Jenkins Dashboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Manage Jenkins` 클릭 &nbsp; > &nbsp; 설치되어 있는 Plugin 목록 중 `Configure Global Security` 선택 &nbsp; > &nbsp; 화면 중간 부분 `Prevent Cross Site Request Forgery exploits` **체크박스 비활성화**~~   
-*본 지침서 작성 초기, Docker image `jenkins/jenkins` 가 아닌 `jenkins` 를 설치하여 사용할 경우에는 CSRF 비활성화 설정을 하였지만 이 후, `jenkins/jenkins` 를 설치하여 사용해보니 CSRF 비활성화 설정은 기본으로 되어 있는 것인지(?) 해당 항목은 없는 것을 확인하고, 혹 Docker image jenkins 를 설치하여 사용하는 경우에는 설정해야하므로 설명에는 남겨 놓음*
+*본 지침서 작성 초기, Docker 이미지 `jenkins/jenkins` 가 아닌 `jenkins` 를 설치하여 사용할 경우에는 CSRF 비활성화 설정을 하였지만 이 후, `jenkins/jenkins` 를 설치하여 사용해보니 CSRF 비활성화 설정은 기본으로 되어 있는 것인지(?) 해당 항목은 없는 것을 확인하고, 혹 Docker 이미지 jenkins 를 설치하여 사용하는 경우에는 설정해야하므로 설명에는 남겨 놓음*
 
 > - [ ] Prevent Cross Site Request Forgery exploits
 
