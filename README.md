@@ -133,7 +133,7 @@ d193e7948249066e97b34ade37d00f33@15
 > docker logs {your-jenkins-container-id}
 
 > ...   
-> <your-jenkins-password>   
+> \<your-jenkins-password\>   
 > ...
 
 ```sh
