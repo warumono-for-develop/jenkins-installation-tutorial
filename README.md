@@ -305,7 +305,7 @@ a3t32p94xe400rr29fb34abc41doofee
 
 새로운 빌드 작업 (job) 생성, 설정 및 빌드 그리고 결과 확인
 
-### Create new job | New Item
+### Create new job
 
 새로운 빌드 작업 생성
 
@@ -389,7 +389,7 @@ Docker Hub 의 image 를 다운로드 (docker pull) 하여 빌드 (docker build)
 |your-jenkins-access-api-token|Jenkins API Token|[API Token 생성](#api-token-생성)|a3t32p94xe400rr29fb34abc41doofee|
 |your-host-ip|Jenkins 호스트 서버 IP|[Instance Configuration](#instance-configuration)|54.081.311.162|
 |your-jenkins-host-port|Jenkins 호스트 서버 PORT|[Instance Configuration](#instance-configuration)|8080|
-|your-jenkins-job-name|빌드 대상 Jenkins job Name|[Create new job \| New Item](#create-new-job-\|-new-item)|hello-jenkins|
+|your-jenkins-job-name|빌드 대상 Jenkins job Name|[Create new job](#create-new-job)|hello-jenkins|
 |your-jenkins-job-build-authentication-token|Jenkins Authentication Token|[Jenkins 원격 빌드 활성화 & Authentication Token 생성](#jenkins-원격-빌드-활성화-&-authentication-token-생성)|hello-jenkins-build-authentication-token|
 
 ```sh
