@@ -112,7 +112,7 @@ Install Jenkins
 your-terminal> docker run -d -p 8090:8080 -v /home/jenkins:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins/jenkins
 ```
 
-### Step 2
+### Step 3
 
 Install Docker in Jenkins
 
@@ -141,7 +141,7 @@ jenkins-terminal> exit
 your-terminal> 
 ```
 
-### Step 3
+### Step 4
 
 Configure Jenkins
 
@@ -230,6 +230,18 @@ jenkins-terminal> cat /var/jenkins_home//secrets/initialAdminPassword
 
 사용자 계정 정보를 입력하여 저장 (`Save and Finish`)
 
+> Username:       {your-jenkins-username}   
+> Password:       {your-jenkins-password}   
+> Full name:      {your-jenkins-full-name}   
+> E-mail address: {your-jenkins-email-address}
+
+```sh
+> Username:       warumono
+> Password:       ********************
+> Full name:      warumono-for-jenkins
+> E-mail address: warumono.for.develop@gmail.com
+```
+
 #### Instance Configuration
 
 `Jenkins URL: http://<your-host-ip>:8080/` 기본 설정 값으로 사용   
@@ -248,13 +260,47 @@ http://54.081.311.162:8080
 
 정상적으로 설정이 완료되었다면, `Jenkins Dahsboard` 화면이 나타남
 
+### Jenkis 원격 빌드 설정
+
+Jenkins 에 접속하지 않고 `curl 명령어` 또는 `웹 브라우져` 를 사용하여 원격으로 빌드 작업을 수행할 수 있는 기능
+
+#### Jenkins 원격 빌드 활성화 & Authentication Token 생성
+
+`Jenkins Dashboard` 화면 &nbsp; > &nbsp; job 목록 중 원격 빌드 대상의 `Name` 클릭   
+`Project {auto-jenkins-job-name}` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Configure` 선택   
+`General` 탭 화면 &nbsp; > &nbsp; `Build Trigger` 섹션 목록 중 `Trigger builds remotely (e.g., from scripts)` **체크박스 활성화**
+체크박스 활성화에 따라 `Authentication Token` 입력 창에 **비밀번호 처럼 사용하게 될 문자열 (암호화된 코드 등으로 가독성이 떨어지는 문자열 사용을 권장)** {your-jenkins-job-build-authentication-token} 입력 및 메모    
+
+> {your-jenkins-job-build-authentication-token}
+
+```sh
+hello-jenkins-build-authentication-token
+```
+
+#### CSRF 비활성화
+
+~~`Jenkins Dashboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Manage Jenkins` 클릭 &nbsp; > &nbsp; 설치되어 있는 Plugin 목록 중 `Configure Global Security` 선택 &nbsp; > &nbsp; 화면 중간 부분 `Prevent Cross Site Request Forgery exploits` **체크박스 비활성화**~~   
+*본 지침서 초반, Docker image `jenkins/jenkins` 가 아닌 `jenkins` 를 설치하여 사용할 경우에는 CSRF 비활성화 작업을 진행하여야 했지만, 작성자의 경우 `jenkins/jenkins` 를 설치하여 사용해보니 CSRF 비활성화 설정은 기본으로 되어 있는 것인지 해당 설정에 대한 항목이 없었지만, Docker image jenkins/jenkins 가 아닌 경우에 설정해야할 작업이므로 설명에는 남겨 놓음*
+
+#### API Token 생성
+
+`Jenkins Dashboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Manage Users` 클릭 &nbsp; > &nbsp; `Users` 화면 &nbsp; > &nbsp; 사용자 목록 중 임의의 사용자 오른쪽 `톱니바퀴 버튼` 클릭 &nbsp; > &nbsp; 사용자 상세 정보 화면 &nbsp; > &nbsp; `API Token` 영역 &nbsp; > &nbsp; `Show API Token...` 클릭 &nbsp; > &nbsp; 자동 생성된 `API Token` 값 {your-jenkins-access-api-token} 메모
+
+> \<your-jenkins-access-api-token>\
+
+```sh
+a3t32p94xe400rr29fb34abc41doofee
+```
+
 
 
 ## Usage
 
-새로운 빌드 작업 (job) 생성
+새로운 빌드 작업 (job) 생성, 설정 및 빌드 그리고 결과 확인
 
 ### Create new job | New Item
+
+새로운 빌드 작업 생성
 
 `Jenkins Dahsboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `New Item` 선택 (또는, 생성된 job 이 없는 경우 화면 중앙에 `Create new job` 을 클릭하여도 동일함)    
 `Enter an item name` 입력 창에 빌드 작업 이름 입력   
@@ -269,6 +315,8 @@ hello-jenkins
 `OK` 클릭   
 
 ### Configure Build
+
+빌드 설정
 
 `General` 탭 화면 &nbsp; > &nbsp; `Build` 섹션 &nbsp; > &nbsp; `Add build step` Drop Down 메뉴 선택 &nbsp; > &nbsp; `Execute shell` 선택    
 `Command` 입력 창이 나타나고, 입력 창에는 Jenkins 빌드 스크립트를 입력    
@@ -285,21 +333,28 @@ echo "Hello Jenkins!"
 
 ### Build
 
-왼쪽 메뉴 아래 `Build History` 영역에는 빌드 진행 횟수와 과정 및 결과 이력이 `#\<your-jenkins-job-build-index\> <your-jenkins-job-build-date>` 형식으로 나타남    
+`Jenkins Dashboard` 화면 왼쪽 메뉴 아래 `Build History` 영역에는 빌드 진행 횟수와 과정 및 결과 이력이 `#\<your-jenkins-job-build-index\>` (빌드 진행 횟수) 와 `<your-jenkins-job-build-date>` (빌드 진행 날짜) 형식으로 나타남    
 빌드 결과에 따라 실패는 `빨간색`, 정상은 `파란색` 으로 표시됨
 
-`Project {your-jenkins-job-name}` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `Build Now` 클릭   
-`Build History` 영역 현재 빌드 `#\<your-jenkins-job-build-index\>` 클릭 &nbsp; > &nbsp; 상세 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `Console Output` 클릭   
+> #\<your-jenkins-job-build-index\>   
+>   <your-jenkins-job-build-date>
+
+```sh
+#1
+  Feb 29, 2020 11:06 PM KST
+``` 
 
 #### Log
 
 빌드 관련 로그 확인
 
+`Jenkins Dashboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 아래 `Build History` 영역 `#\<your-jenkins-job-build-index\>` 클릭 &nbsp; > &nbsp; `Project {your-jenkins-job-name}` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `Build Now` 클릭 &nbsp; > &nbsp; `Build History` 영역 현재 빌드 `#\<your-jenkins-job-build-index\>` 클릭 &nbsp; > &nbsp; 상세 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `Console Output` 클릭
+
 로그 마지막 줄 **Finished: \<your-jenkins-job-build-result\>** 부분이 빌드 결과
 
 > Started by user \<your-jenkins-username\>  
 > ...
-> ...
+> <your-comment>
 > ...
 > Finished: \<your-jenkins-job-build-result\>
 
@@ -308,6 +363,45 @@ Started by user warumono
 Running as SYSTEM
 Building in workspace /var/jenkins_home/workspace/hello-jenkins
 [hello-jenkins] $ /bin/sh -xe /tmp/jenkins7074309935194145387.sh
++ echo Hello Jenkins!
+Hello Jenkins!
+Finished: SUCCESS
+```
+
+여기서는 아주 간단한 빌드 작업을 진행하였지만 일반적으로 개발 과정 중 순차적으로 진행되는 리소스 형상관리, 빌드 및 배포 작업을 번거롭게 개발자가 직접 하나 하나 작업하던 것을 Jenkins 빌드 작업으로 일괄 작업할 수 있음    
+Github 과 연동하여 Github repository 를 다운로드 (git pull) 하여 해당 repository 를 빌드 후 서버에 배포 한다거나,    
+Docker Hub 의 image 를 다운로드 (docker pull) 하여 빌드 (docker build) 후 실행 (docker run) 하는 작업 진행을 스크립트에 작성하여 번거로운 작업을 일괄적으로 할 수 있음   
+Jenkins 에서 제공하는 plugin 들을 사용하여 보다 복잡하고 번거로운 작업을 일괄적으로 처리하는 것이 가능
+
+
+#### Jenkin 원격 빌드
+
+> curl -X POST http://{your-jenkins-username}:{your-jenkins-access-api-token}@{your-host-ip}:{your-jenkins-host-port}/job/{your-jenkins-job-name}/build?token={your-jenkins-job-build-authentication-token}
+
+|변수|설명|참조|비고|
+|---|---|---|---|
+|your-jenkins-username|Jenkins 사용자 Username|[Create First Admin User](#create-first-admin-user)||
+|your-jenkins-access-api-token|Jenkins API Token|[API Token 생성](#api-token-생성)||
+|your-host-ip|Jenkins 호스트 서버 IP|[Instance Configuration](#instance-configuration)||
+|your-jenkins-host-port|Jenkins 호스트 서버 PORT|[Instance Configuration](#instance-configuration)||
+|your-jenkins-job-name|빌드 대상 Jenkins job Name|[Create new job | New Item](#create-new-job-|-new-item)||
+|your-jenkins-job-build-authentication-token|Jenkins Authentication Token|[Jenkins 원격 빌드 활성화 & Authentication Token 생성](#jenkins-원격-빌드-활성화-&-authentication-token-생성)||
+
+```sh
+your-terminal> curl -X POST http://warumono:a3t32p94xe400rr29fb34abc41doofee@54.081.311.162:8080/job/hello-jenkins/build?token=hello-jenkins-build-authentication-token
+```
+
+정상적으로 원격 빌드 작업을 수행하였다면, [Log](#log) 설명과 같은 절차로 빌드 결과를 확인할 수 있음    
+단, [Log](#log) 설명 내의 로그 정보 중 **첫번째 줄의 정보**가 다음과 같은 차이점이 있음
+
+> Jenkins 내부에서 직접 빌드 작업한 경우 **Started by `remote host` \<your-remote-ip\>**   
+> 외부에서 Jenkins 원격 빌드 작업한 경우 **Started by `user` \<your-jenkins-username\>**
+
+```sh
+Started by remote host 54.081.311.162
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/hello-jenkins
+[{hello-jenkins] $ /bin/sh -xe /tmp/jenkins2767083941166045842.sh
 + echo Hello Jenkins!
 Hello Jenkins!
 Finished: SUCCESS
