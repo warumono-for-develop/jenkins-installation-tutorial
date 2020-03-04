@@ -231,16 +231,16 @@ jenkins-terminal> cat /var/jenkins_home/secrets/initialAdminPassword
 
 사용자 계정 정보를 입력하여 저장 (`Save and Finish`)
 
-> Username &nbsp; &nbsp; &nbsp; {your-jenkins-username}   
-> Password &nbsp; &nbsp; &nbsp; {your-jenkins-password}   
-> Full name &nbsp; &nbsp; &nbsp;{your-jenkins-full-name}   
-> E-mail address {your-jenkins-email-address}
+> Username &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{your-jenkins-username}   
+> Password &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {your-jenkins-password}   
+> Full name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {your-jenkins-full-name}   
+> E-mail address &nbsp; {your-jenkins-email-address}
  &nbsp;
 ```sh
-> Username       warumono
-> Password       ********************
-> Full name      warumono-for-jenkins
-> E-mail address warumono.for.develop@gmail.com
+Username       warumono
+Password       ********************
+Full name      warumono-for-jenkins
+E-mail address warumono.for.develop@gmail.com
 ```
 
 #### Instance Configuration
