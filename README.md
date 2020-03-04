@@ -285,69 +285,33 @@ echo "Hello Jenkins!"
 
 ### Build
 
+왼쪽 메뉴 아래 `Build History` 영역에는 빌드 진행 횟수와 과정 및 결과 이력이 `#\<your-jenkins-job-build-index\> <your-jenkins-job-build-date>` 형식으로 나타남    
+빌드 결과에 따라 실패는 `빨간색`, 정상은 `파란색` 으로 표시됨
+
 `Project {your-jenkins-job-name}` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `Build Now` 클릭   
-왼쪽 메뉴 아래에 `Build History` 에 실행 횟수에 따라 `#{auto-jenkins-build-index}` 와 실행 날짜가 생성되어 표시 됨
+`Build History` 영역 현재 빌드 `#\<your-jenkins-job-build-index\>` 클릭 &nbsp; > &nbsp; 상세 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `Console Output` 클릭   
 
-Progress bar 가 나타나 진행 상태를 보여주며 빌드 오류 시 `빨간색` 으로 표시되고, 정상적인 경우 `파란색` 으로 표시 됨
+#### Log
 
+빌드 관련 로그 확인
 
+로그 마지막 줄 **Finished: \<your-jenkins-job-build-result\>** 부분이 빌드 결과
 
-
-
-
-
-Docker Hub 에서 기본적으로 제공하는 `hello-world` **이미지를 다운로드** 하고, 해당 이미지의 **컨테이너를 실행**하는 명령어를 입력
-
-
-
-> 앞서 [Step 4](#step-4) 에서 설명한대로 사용자가 Jupyter Notebook 을 외부 (웹 브라우져) 에서 접속할 경우 AWS EC2 인스턴스 상세정보 중 **IPv4 Public IP** 사용
-
-### Run Jupyter Notebook
-
-> jupyter-notebook --allow-root   
-
-> \[...\] {your-jupyter-notebook-scheme}://{your-host-ip}:{your-jupyter-notebook-port}/    
-
-작성자는 SSL 을 적용하여 작업하는 상태이므로, 다음 예시에서 `{your-jupyter-notebook-scheme}` 은 `https` 로 나타남
+> Started by user \<your-jenkins-username\>  
+> ...
+> ...
+> ...
+> Finished: \<your-jenkins-job-build-result\>
 
 ```sh
-your-terminal> sudo jupyter-notebook --allow-root
-...
-[...] https://172.31.35.203:8888/
-...
+Started by user warumono
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/hello-jenkins
+[hello-jenkins] $ /bin/sh -xe /tmp/jenkins7074309935194145387.sh
++ echo Hello Jenkins!
+Hello Jenkins!
+Finished: SUCCESS
 ```
-
-### Connect to Jupyter Notebook on Web Browser
-
-> {your-jupyter-notebook-scheme}://{your-host-ip}:{your-jupyter-notebook-port}
-
-Jupyter Notebook 실행 로그 정보 중 접속 URL {your-jupyter-notebook-scheme}://**{your-host-ip}**:{your-jupyter-notebook-port} 에서 `{your-host-ip}` 는 AWS EC2 인스턴스의 **Private IPs** 즉, EC2 내부 IP 로 제시하는 URL 그대로 사용해서는 Jupyter Notebook 에 접속할 수 없음   
-웹 브라우져를 실행하고 URL 입력 창에 {your-jupyter-notebook-scheme}://**{AWS EC2 인스턴스 상세정보 중 IPv4 Public IP}**:{your-jupyter-notebook-port} 를 입력하여 접속
-
-> ~~https://172.31.35.203:8888~~
-
-```
-https://54.081.311.162:8888
-```
-
-<details>
-  <summary>[Optional] 알 수 없는 인증기관 발급 사설 인증서에 따른 Jupyter Notebook URL 접근 불가 해결 방법</summary> 
-
-Google Chrome 웹 브라우져의 경우, 알 수 없는 인증기관에서 발급된 사설인증서를 이용한 사이트 접근을 우선적으로 방지하고 있어 경고 화면이 나오게 됨   
-이 경우, 경고 화면에서 어떠한 동작도 하지 않고   
-<kbd>t</kbd><kbd>h</kbd><kbd>i</kbd><kbd>s</kbd><kbd>i</kbd><kbd>s</kbd><kbd>u</kbd><kbd>n</kbd><kbd>s</kbd><kbd>a</kbd><kbd>f</kbd><kbd>e</kbd>    
-를 키보드로 입력하면 해당 사이트 접근이 가능하도록 되어 있음   
-본 지침서의 경우도 마찬가지로 사설인증서이기에 경고 화면이 나오면`thisisunsafe` 를 입력하여야 Jupyter Notebook Dashboard 화면으로 접근 가능
-
----
-</details>
-
-### Jupyter Notebook Dashboard
-
-*Jupyter 공식 웹사이트의 예시 화면*    
-예시 화면의 오른쪽 위 *`New v`* 버튼을 눌러 Drop Down 메뉴 중 *`Terminal`* 을 선택하면 새 브라우져 창 (또는 새 탭) 으로 터미널 화면이 나옴    
-![Jupyter Notebook Dashboard](https://jupyter.readthedocs.io/en/latest/_images/tryjupyter_file.png)
-
 
 
 ## FAQ
