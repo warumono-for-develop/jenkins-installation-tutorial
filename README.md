@@ -357,12 +357,12 @@ echo "Hello Jenkins!"
 
 `Jenkins Dashboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 아래 `Build History` 영역 `#\<your-jenkins-job-build-index\>` 클릭 &nbsp; > &nbsp; `Project {your-jenkins-job-name}` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `Build Now` 클릭 &nbsp; > &nbsp; `Build History` 영역 현재 빌드 `#\<your-jenkins-job-build-index\>` 클릭 &nbsp; > &nbsp; 상세 화면 &nbsp; > &nbsp; 왼쪽 메뉴 `Console Output` 클릭
 
-로그 마지막 줄 **Finished: \<your-jenkins-job-build-result\>** 부분이 빌드 결과
+로그 마지막 줄 **Finished: \<your-jenkins-job-build-result\>** 부분이 빌드 결과    
+본 지침서에는 빌드 실패에 관한 설명은 없으니, 빌드 실패 사용자는 로그 정보에서 오류 원인을 확인하여 정상적으로 빌드가 되도록 해야 함
 
-> Started by user \<your-jenkins-username\>  
-> ...
-> <your-comment>
-> ...
+> Started by user \<your-jenkins-username\>   
+> ...   
+> \<your-comment\>    
 > Finished: \<your-jenkins-job-build-result\>
 
 ```sh
