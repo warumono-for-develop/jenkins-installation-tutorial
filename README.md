@@ -206,7 +206,7 @@ jenkins-terminal>
 > <your-jenkins-administrator-password>
 
 ```sh
-jenkins-terminal> cat /var/jenkins_home//secrets/initialAdminPassword
+jenkins-terminal> cat /var/jenkins_home/secrets/initialAdminPassword
 016b9b01454f418caf2dab842474b351
 ```
 
