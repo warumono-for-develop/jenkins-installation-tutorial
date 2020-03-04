@@ -87,9 +87,11 @@ Expanded
 
 Download Jenkins
 
-Jenkins 설치 파일도 존재하나, 본 지침서에서는 Docker 이미지를 사용하여 설치하는 방법으로 설명
+Jenkins 설치 파일도 존재하나, 본 지침서에서는 Docker 이미지를 사용하여 설치하는 방법으로 설명   
 Jenkins 공식 사이트에서 제공하는 이미지의 이름은 `jenkins` 이나, ~~업데이트 및 관리가 지속적으로 되고 있지 않다는 소문(?)이 있으니~~    
 다른 이미지 이름 `jenkins/jenkins` 이미지를 다운로드 (docker pull) 할 것을 권장
+
+> docker pull {jenkins-image-name-with-tag}
 
 ```sh
 your-terminal> docker search jenkins
