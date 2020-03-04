@@ -43,7 +43,10 @@
 <!--
 <details> 
   <summary>Collapse</summary>
-  Expanded
+
+Expanded
+
+---
 </details>
 -->
 
@@ -101,7 +104,7 @@ your-terminal> docker pull jenkins/jenkins
 
 Install Jenkins
 
-> docker run -d -p {your-host-port}:{your-jenkins-port} -v {your-host-directory-path}:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins/jenkins
+> docker run -d -p {your-jenkins-host-port}:{your-jenkins-port} -v {your-host-directory-path}:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -u root jenkins/jenkins
 
 `{your-host-directory-path}` 는 Jenkins 의 설정 정보 등이 로컬 (또는 Host) 디렉토리로 **백업**의 의미로 연결해 놓은 것이라고 이해하면 됨
 
@@ -111,24 +114,17 @@ your-terminal> docker run -d -p 8090:8080 -v /home/jenkins:/var/jenkins_home -v 
 
 ### Step 3
 
-#### Caution
+Configure Jenkins
 
-Jenkins 설치 후 최초 로그인 화면에서 비밀번호가 필요한데, 해당 비밀번호는 설치시 임의의 해시 값으로 지정되어 있어 Jenkins 내부 파일에서 찾을 수 있음   
-Jenkins 최초 로그인 화면에서 경로 정보 (/var/jenkins_home/secrets/initialAdminPassword) 를 사용   
+#### Jenkins 접속
 
-> docker exec -it {your-jenkins-container-id} /bin/bash
+웹 브라우져를 실행하여 URL 입력 창에 `{your-host-ip}:{your-jenkins-host-port}` 를 입력하여 Jenkin 접속
 
-> cat {your-jenkins-home-path}/secrets/initialAdminPassword
-<your-jenkins-password>
+#### Unlock Jenins
 
-```sh
-your-terminal> docker exec -it 367932a46403 /bin/bash
+Jenkins 설치 후 최초 화면에서 비밀번호 (Jeknins 계정 비밀번호 아님) 가 필요한데, 해당 비밀번호는 설치 시 Jenkins 내부 파일 (Jenkins 최초 화면에 표시되어 있는 경로 `{your-jenkins-home-path}/secrets/initialAdminPassword`) 에 저장되어 있음
 
-jenkins-terminal> cat /var/jenkins_home/secrets/initialAdminPassword
-d193e7948249066e97b34ade37d00f33@15
-```
-
-또는, Jenkins 설치 시 Docker 의 로그 정보에서도 찾을 수 있음    
+Docker 의 로그 정보에서 찾을 수 있음    
 
 > docker logs {your-jenkins-container-id}
 
@@ -139,10 +135,79 @@ d193e7948249066e97b34ade37d00f33@15
 ```sh
 your-terminal> docker logs 367932a46403
 ...
-d193e7948249066e97b34ade37d00f33@15
+*************************************************************
+*************************************************************
+*************************************************************
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+016b9b01454f418caf2dab842474b351
+
+This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
 ...
 ```
->>>>>>
+
+<details> 
+  <summary>Jenkins 내부에서 비밀번호 찾기</summary>
+
+
+Jenkins 최초 화면에 표시되어 있는 경로 `{your-jenkins-home-path}/secrets/initialAdminPassword`
+
+Docker 명령어를 사용하여 Jenkins 내부 접속
+
+> docker exec -it {your-jenkins-container-id} /bin/bash
+
+```sh
+your-terminal> docker exec -it 367932a46403 /bin/bash
+
+jenkins-terminal> 
+```
+
+VIM 파일 내용 보기 명령어로 비밀번호 찾기
+
+> cat {your-jenkins-home-path}/secrets/initialAdminPassword
+
+> <your-jenkins-administrator-password>
+
+```sh
+your-terminal> cat /var/jenkins_home//secrets/initialAdminPassword
+016b9b01454f418caf2dab842474b351
+```
+
+---
+</details>
+
+> {your-jenkins-password}
+
+```sh
+016b9b01454f418caf2dab842474b351
+```
+
+`Administrator password` 입력 창에 {your-jenkins-password} 를 복사하여 붙여넣기
+
+#### Customize Jenkins
+
+`Install suggested plugins` 선택   
+`Getting Started` 화면으로 이동되어 자동으로 plugin 설치    
+*다소 시간이 걸리므로 설치 완료 될때까지 기다림*
+
+#### Create First Admin User
+
+사용자 계정 정보를 입력하여 저장 (`Save and Finish`)
+
+#### Instance Configuration
+
+`Jenkins URL: http://<your-host-ip>:8080/` 기본 설정 값으로 사용
+
+#### Jenkins is ready!
+
+`Start using Jenkins` 버튼 클릭
+
+정상적으로 설정이 완료되었다면, `Jenkins 대시보드` 화면이 나타남
+
+
+
 
 
 
