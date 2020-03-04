@@ -122,9 +122,10 @@ Configure Jenkins
 
 #### Unlock Jenins
 
-Jenkins 설치 후 최초 화면에서 비밀번호 (Jeknins 계정 비밀번호 아님) 가 필요한데, 해당 비밀번호는 설치 시 Jenkins 내부 파일 (Jenkins 최초 화면에 표시되어 있는 경로 `{your-jenkins-home-path}/secrets/initialAdminPassword`) 에 저장되어 있음
+Jenkins 설치 후 최초 화면에서 비밀번호 (Jeknins 계정 비밀번호 아님) 가 필요하며, 이는 Docker 의 로그 정보에서 찾을 수 있음   
+*해당 비밀번호는 설치 시 Jenkins 내부 파일 (Jenkins 최초 화면에 표시되어 있는 경로 `{your-jenkins-home-path}/secrets/initialAdminPassword`) 에 저장되어 있음*
 
-Docker 의 로그 정보에서 찾을 수 있음    
+Docker 의 로그 정보 확인  
 
 > docker logs {your-jenkins-container-id}
 
@@ -152,7 +153,7 @@ This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
   <summary>Jenkins 내부에서 비밀번호 찾기</summary>
 
 
-Jenkins 최초 화면에 표시되어 있는 경로 `{your-jenkins-home-path}/secrets/initialAdminPassword`
+Docker jenkins 이미지를 사용하여 Jenkins 를 설치하는 경우에는 Docker container 즉, Jenkins container 내부로 접속하여야 내부 파일에 접근 가능   
 
 Docker 명령어를 사용하여 Jenkins 내부 접속
 
