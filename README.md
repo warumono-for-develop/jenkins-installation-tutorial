@@ -262,7 +262,7 @@ http://54.081.311.162:8080
 
 ### Jenkis 원격 빌드 설정
 
-Jenkins 에 접속하지 않고 `curl 명령어` 또는 `웹 브라우져` 를 사용하여 원격으로 빌드 작업을 수행할 수 있는 기능
+Jenkins 에 접속하지 않고 `curl` 명령어 또는 `웹 브라우져` 를 사용하여 원격으로 빌드 작업을 수행할 수 있는 기능
 
 #### Jenkins 원격 빌드 활성화 & Authentication Token 생성
 
@@ -282,11 +282,17 @@ hello-jenkins-build-authentication-token
 ~~`Jenkins Dashboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Manage Jenkins` 클릭 &nbsp; > &nbsp; 설치되어 있는 Plugin 목록 중 `Configure Global Security` 선택 &nbsp; > &nbsp; 화면 중간 부분 `Prevent Cross Site Request Forgery exploits` **체크박스 비활성화**~~   
 *본 지침서 작성 초기, Docker image `jenkins/jenkins` 가 아닌 `jenkins` 를 설치하여 사용할 경우에는 CSRF 비활성화 설정을 하였지만 이 후, `jenkins/jenkins` 를 설치하여 사용해보니 CSRF 비활성화 설정은 기본으로 되어 있는 것인지(?) 해당 항목은 없는 것을 확인하고, 혹 Docker image jenkins 를 설치하여 사용하는 경우에는 설정해야하므로 설명에는 남겨 놓음*
 
+> - [ ] Prevent Cross Site Request Forgery exploits
+
+```sh
+- [ ] Prevent Cross Site Request Forgery exploits
+```
+
 #### API Token 생성
 
 `Jenkins Dashboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Manage Users` 클릭 &nbsp; > &nbsp; `Users` 화면 &nbsp; > &nbsp; 사용자 목록 중 임의의 사용자 오른쪽 `톱니바퀴 버튼` 클릭 &nbsp; > &nbsp; 사용자 상세 정보 화면 &nbsp; > &nbsp; `API Token` 영역 &nbsp; > &nbsp; `Show API Token...` 클릭 &nbsp; > &nbsp; 자동 생성된 `API Token` 값 {your-jenkins-access-api-token} 메모
 
-> \<your-jenkins-access-api-token>\
+> \<your-jenkins-access-api-token\>
 
 ```sh
 a3t32p94xe400rr29fb34abc41doofee
@@ -378,12 +384,12 @@ Docker Hub 의 image 를 다운로드 (docker pull) 하여 빌드 (docker build)
 
 |변수|설명|참조|비고|
 |---|---|---|---|
-|your-jenkins-username|Jenkins 사용자 Username|[Create First Admin User](#create-first-admin-user)||
-|your-jenkins-access-api-token|Jenkins API Token|[API Token 생성](#api-token-생성)||
-|your-host-ip|Jenkins 호스트 서버 IP|[Instance Configuration](#instance-configuration)||
-|your-jenkins-host-port|Jenkins 호스트 서버 PORT|[Instance Configuration](#instance-configuration)||
-|your-jenkins-job-name|빌드 대상 Jenkins job Name|[Create new job \| New Item](#create-new-job-\|-new-item)||
-|your-jenkins-job-build-authentication-token|Jenkins Authentication Token|[Jenkins 원격 빌드 활성화 & Authentication Token 생성](#jenkins-원격-빌드-활성화-&-authentication-token-생성)||
+|your-jenkins-username|Jenkins 사용자 Username|[Create First Admin User](#create-first-admin-user)|warumono|
+|your-jenkins-access-api-token|Jenkins API Token|[API Token 생성](#api-token-생성)|a3t32p94xe400rr29fb34abc41doofee|
+|your-host-ip|Jenkins 호스트 서버 IP|[Instance Configuration](#instance-configuration)|54.081.311.162|
+|your-jenkins-host-port|Jenkins 호스트 서버 PORT|[Instance Configuration](#instance-configuration)|8080|
+|your-jenkins-job-name|빌드 대상 Jenkins job Name|[Create new job \| New Item](#create-new-job-\|-new-item)|hello-jenkins|
+|your-jenkins-job-build-authentication-token|Jenkins Authentication Token|[Jenkins 원격 빌드 활성화 & Authentication Token 생성](#jenkins-원격-빌드-활성화-&-authentication-token-생성)|hello-jenkins-build-authentication-token|
 
 ```sh
 your-terminal> curl -X POST http://warumono:a3t32p94xe400rr29fb34abc41doofee@54.081.311.162:8080/job/hello-jenkins/build?token=hello-jenkins-build-authentication-token
