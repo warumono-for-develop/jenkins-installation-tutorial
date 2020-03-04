@@ -382,7 +382,7 @@ Docker Hub 의 image 를 다운로드 (docker pull) 하여 빌드 (docker build)
 |your-jenkins-access-api-token|Jenkins API Token|[API Token 생성](#api-token-생성)||
 |your-host-ip|Jenkins 호스트 서버 IP|[Instance Configuration](#instance-configuration)||
 |your-jenkins-host-port|Jenkins 호스트 서버 PORT|[Instance Configuration](#instance-configuration)||
-|your-jenkins-job-name|빌드 대상 Jenkins job Name|[Create new job | New Item](#create-new-job-|-new-item)||
+|your-jenkins-job-name|빌드 대상 Jenkins job Name|[Create new job \| New Item](#create-new-job-|-new-item)||
 |your-jenkins-job-build-authentication-token|Jenkins Authentication Token|[Jenkins 원격 빌드 활성화 & Authentication Token 생성](#jenkins-원격-빌드-활성화-&-authentication-token-생성)||
 
 ```sh
