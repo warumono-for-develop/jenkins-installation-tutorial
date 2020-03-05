@@ -31,6 +31,7 @@
 
 - [Getting Started](#getting-started)
 - [Install](#install)
+- [Plugin](#plugin)
 - [Usage](#usage)
 - [FAQ](#faq)
 - [Contact](#contact)
@@ -267,10 +268,10 @@ Jenkins 에 접속하지 않고 `curl` 명령어 또는 `웹 브라우져` 를 �
 
 #### Jenkins 원격 빌드 활성화 & Authentication Token 생성
 
-`Jenkins Dashboard` 화면 &nbsp; > &nbsp; job 목록 중 원격 빌드 대상의 `Name` 클릭   
-`Project {auto-jenkins-job-name}` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Configure` 선택   
-`General` 탭 화면 &nbsp; > &nbsp; `Build Trigger` 섹션 목록 중 `Trigger builds remotely (e.g., from scripts)` **체크박스 활성화**
-체크박스 활성화에 따라 `Authentication Token` 입력 창에 **비밀번호 처럼 사용하게 될 문자열 (암호화된 코드 등으로 가독성이 떨어지는 문자열 사용을 권장)** {your-jenkins-job-build-authentication-token} 입력 및 메모    
+`Jenkins Dashboard` 화면 &nbsp; > &nbsp; job 목록 중 원격 빌드 대상의 `Name` 클릭 &nbsp; > &nbsp; `Project {auto-jenkins-job-name}` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Configure` 선택 &nbsp; > &nbsp; `General` 탭 화면 &nbsp; > &nbsp; `Build Trigger` 영역   
+`Trigger builds remotely (e.g., from scripts)` **체크박스 활성화**
+체크박스 활성화에 따라 나타나는 `Authentication Token` 입력 창에 {your-jenkins-job-build-authentication-token} 입력 및 메모    
+`{your-jenkins-job-build-authentication-token}` 는 **비밀번호 처럼 사용하게 될 문자열** 이므로 암호화된 코드 등으로 가독성이 떨어지는 문자열 사용을 권장
 
 > {your-jenkins-job-build-authentication-token}
 
@@ -300,6 +301,64 @@ a3t32p94xe400rr29fb34abc41doofee
 ```
 
 
+## Plugin
+
+Jenkins 의 job 빌드 결과를 실시간 알림으로 확인할 수 있는 Plugin
+
+### On Jenkins
+
+#### Install the Plugin in Jenkins
+
+`Jenkins Dashboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Manage Jenkins` 클릭 &nbsp; > &nbsp; `Manage Plugins` 선택 &nbsp; > &nbsp; `Manage Plugins` 화면에서 `Available 탭` 클릭 &nbsp; > &nbsp; `Filter 입력 창` 에 `Websocket` 입력 &nbsp; > &nbsp; 조회 목록 중 - [x] `Websocket Notifier` 체크박스 활성화 &nbsp; > &nbsp; `Download now and install after restart` 버튼 클릭
+
+> [Websocket Notifier](https://plugins.jenkins.io/websocket/)
+
+```sh
+Websocket Notifier
+```
+
+Websocket Notifier 가 정상적으로 설치 완료되었다면 Jenkins 는 재가동 되었으므로 다시 로그인
+
+#### Configure Websocket Notifier
+
+`Jenkins Dashboard` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Manage Jenkins` 클릭 &nbsp; > &nbsp; `Configure Systems` 선택 &nbsp; > &nbsp; `Configure Systems` 화면에서 맨 아래의 `Websocket Notifier` 영역
+
+> Port {your-jenkins-websocket-port}   
+> \[x\] Enable Websocket pings to keep connections alive    
+> Ping interval	{your-jenkins-ping-interval}
+
+기본 값 그대로 설정    
+*사용자의 환경에 맞도록 설정 가능*
+
+```
+Port 8081
+Use status format [ ]
+[x] Enable Websocket pings to keep connections alive
+Ping interval	20
+```
+
+#### Configure job
+
+`Jenkins Dashboard` 화면 &nbsp; > &nbsp; job 목록 중 원격 빌드 대상의 `Name` 클릭 &nbsp; > &nbsp; `Project {auto-jenkins-job-name}` 화면 &nbsp; > &nbsp; 왼쪽 메뉴 중 `Configure` 선택 &nbsp; > &nbsp; `General` 탭 화면 &nbsp; > &nbsp; `Post-build Actions` 영역
+
+`Add post-build action` 버튼을 선택하여 Drop Down 메뉴 중 `Websocket Notifier` 선택
+
+### On Chrome
+
+[Chrome 웹 브라우저](https://www.google.com/intl/ko/chrome/) 의 확장 프로그램을 사용하게 되면 간단 설치 및 설정만으로 사용 가능    
+다만 모바일 등에서는 Chrome 웹 브라우저 확장 프로그램을 사용할 수 없게 되어 사용자 또는 관련자들이 이동중에 실시간으로 알림을 받을 수 없는 단점이 있음    
+이러한 단점을 보완할 수 있는 [Slack](https://slack.com/intl/en-kr/) 등의 프로그램으로 이동중에도 실시간으로 알림을 받을 수 있음
+
+#### Install the Extension in Chrome
+
+[Chrome 웹 브라우저](https://www.google.com/intl/ko/chrome/) 의 확장 프로그램을 사용
+
+`Chrome Extension` 으로 이동하여 `jenkins` 검색어로 조회하여 결과 목록 중 `Yet Another Jenkins Notifier` 확장 프로그램 선택 설치   
+[Chrome web store - Yet Another Jenkins Notifier](https://chrome.google.com/webstore/detail/yet-another-jenkins-notif/cimdjdaglanfkpfpoemjkfkmjgkmahpg?utm_source=chrome-ntp-icon)
+
+[GitHub - Yet Another Jenkins Notifier](https://github.com/ggirou/yet-another-jenkins-notifier) 참조하길 권장
+
+
 
 ## Usage
 
@@ -319,7 +378,7 @@ hello-jenkins
 ```
 
 `Freestyle project` 선택    
-`OK` 클릭   
+`OK` 클릭
 
 ### Configure Build
 
@@ -336,7 +395,17 @@ hello-jenkins
 echo "Hello Jenkins!"
 ```
 
-`Save` 클릭   
+`Save` 클릭
+
+[Pligin](#plugin) 절차에 따라 [Yet Another Jenkins Notifier](https://chrome.google.com/webstore/detail/yet-another-jenkins-notif/cimdjdaglanfkpfpoemjkfkmjgkmahpg?utm_source=chrome-ntp-icon) 를 설치한 경우, Chrome 웹 브라우저 확장 프로그램 아이콘 바에서 `Yet Another Jenkins Notifier` 버튼 (Jenkins 공식 로고와 같음) 을 클릭하여 `Url` 입력 창에 `job` URL 을 입력하여 ` + ` 클릭    
+
+`job` URL
+
+> {your-host-ip}:{your-jenkins-host-port}/job/{your-jenkins-job-name}
+
+```sh
+http://54.081.311.162:8090/job/hello-jenkins
+```
 
 ### Build
 
@@ -374,6 +443,8 @@ Building in workspace /var/jenkins_home/workspace/hello-jenkins
 Hello Jenkins!
 Finished: SUCCESS
 ```
+
+[Pligin](#plugin) 절차에 따라 [Yet Another Jenkins Notifier](https://chrome.google.com/webstore/detail/yet-another-jenkins-notif/cimdjdaglanfkpfpoemjkfkmjgkmahpg?utm_source=chrome-ntp-icon) 를 설치한 경우, Chrome 웹 브라우저로부터 알림을 확인할 수 있음  
 
 본 지침서에서는 아주 간단한 빌드 작업을 진행하였지만 일반적으로 개발 과정 중 순차적으로 진행되는 리소스 형상관리, 빌드 및 배포 작업을 번거롭게 개발자가 직접 하나 하나 작업하던 것을 Jenkins 빌드 작업으로 일괄 처리할 수 있음    
 Github 과 연동하여 Github repository 를 다운로드 (git pull) 하여 해당 repository 를 빌드 후 서버에 배포 한다거나,    
