@@ -126,12 +126,19 @@ Docker 설치 Shell Script 파일을 다운로드 후, 해당 Shell Script 를 �
 [Docker](https://www.docker.com/) 공식 [Github](https://github.com/docker/docker-install) 참조
 
 Docker 명령어를 사용하여 **Jenkins 내부에 접속한 상태**에서 진행    
-작업 완료 후, `exit` 을 입력하여 Jenkins 로 부터 나옴
+작업 완료 후, `exit` 을 입력하여 Jenkins 로 부터 나옴    
+[Docker Installation Tutorial](https://github.com/warumono-for-develop/spring-boot-github-docker-jenkins-ci-cd-tutorial/blob/master/README.md) 의 [FAQ](faq) \> [Docker 명령어 간단 사용 방법](https://github.com/warumono-for-develop/spring-boot-github-docker-jenkins-ci-cd-tutorial#docker-명령어-간단-사용-방법) \> [About container](https://github.com/warumono-for-develop/spring-boot-github-docker-jenkins-ci-cd-tutorial#about-container) \> [컨테이너 내부 접속](https://github.com/warumono-for-develop/spring-boot-github-docker-jenkins-ci-cd-tutorial#컨테이너-내부-접속) 참조
 
+> docker exec -it {your-docker-container-id} /bin/bash    
 > curl -fsSL https://get.docker.com -o get-docker.sh    
 > sh get-docker.sh
 
 ```sh
+your-terminal> docker ps -a
+CONTAINER ID   IMAGE                                     COMMAND                  CREATED        STATUS       PORTS                               NAMES
+725486c2a607   jenkins/jenkins                           "/sbin/tini -- /usr/…"   21 hours ago   Up 1 hours   50000/tcp, 0.0.0.0:8090->8080/tcp   adoring_ptolemy
+your-terminal> docker exec -it 725486c2a607 /bin/bash
+jenkins-terminal> 
 jenkins-terminal> cd ~
 jenkins-terminal> curl -fsSL https://get.docker.com -o get-docker.sh
 jenkins-terminal> ls
