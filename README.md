@@ -9,7 +9,7 @@
     <img src="https://github.com/warumono-for-develop/default/blob/master/logos/warumono-logo-492x500.png?raw=true" alt="Logo" width="292" height="300">
   </a>
 
-  <h1 align="center">Jupyter Notebook Installation Tutorial</h1>
+  <h1 align="center">Jenkins Installation Tutorial</h1>
 
   <p align="center">
     Jenkins 프로그램 설치 관련 지침서
