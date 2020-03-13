@@ -148,6 +148,7 @@ jenkins-terminal> sh get-docker.sh
 jenkins-terminal> docker --version
 Docker version 19.03.6, build 369ce74a3c
 jenkins-terminal> exit
+exit
 your-terminal> 
 ```
 
