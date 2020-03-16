@@ -201,7 +201,6 @@ your-terminal>
 <details> 
   <summary>Jenkins 내부에서 비밀번호 찾기</summary>
 
-
 Docker jenkins 이미지를 사용하여 Jenkins 를 설치하는 경우에는 Docker container 즉, Jenkins container 내부로 접속하여야 내부 파일에 접근 가능   
 
 #### Docker 명령어를 사용하여 Jenkins 내부 접속
@@ -217,6 +216,8 @@ your-terminal> docker exec -it 367932a46403 /bin/bash
 jenkins-terminal> 
 ```
 
+Jenkins 설치 후 최초 화면에서 `Administrator password` 입력 창에 {your-jenkins-password} 를 복사하여 붙여넣기
+
 #### VIM 파일 내용 보기 명령어로 비밀번호 찾기
 
 > cat {your-jenkins-home-path}/secrets/initialAdminPassword
@@ -230,14 +231,6 @@ jenkins-terminal> cat /var/jenkins_home/secrets/initialAdminPassword
 
 ---
 </details>
-
-> {your-jenkins-password}
-
-```sh
-016b9b01454f418caf2dab842474b351
-```
-
-`Administrator password` 입력 창에 {your-jenkins-password} 를 복사하여 붙여넣기
 
 #### Customize Jenkins
 
