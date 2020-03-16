@@ -174,8 +174,11 @@ Docker 의 로그 정보 확인
 > ...
 
 ```sh
-your-terminal> docker logs 367932a46403
+your-terminal> docker logs 725486c2a607
+Running from: /usr/share/jenkins/jenkins.war
+webroot: EnvVars.masterEnvVars.get("JENKINS_HOME")
 ...
+
 *************************************************************
 *************************************************************
 *************************************************************
@@ -186,7 +189,13 @@ Please use the following password to proceed to installation:
 016b9b01454f418caf2dab842474b351
 
 This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+
+*************************************************************
+*************************************************************
+*************************************************************
+
 ...
+your-terminal> 
 ```
 
 <details> 
